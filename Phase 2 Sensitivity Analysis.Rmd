@@ -764,7 +764,7 @@ ggsave("heat_averted_di.png",
 
 df_params_twsa <- data.frame(pars = c("p_det_surv", "p_und_it"),
                               # min parameter values
-                              min  = c(0.1, 0.0), 
+                              min  = c(0.05, 0.6), 
                               # max parameter values
                               max  = c(0.5, 1.0) 
                               )
@@ -775,9 +775,9 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Transfusions'),
+                         outcomes = c('IUTs_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -788,9 +788,9 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Averted'),
+                         outcomes = c('Deaths_Averted'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -830,55 +830,3 @@ ggsave("heat_averted_dt.png",
 
 ```
 ***
-```{r, warning = FALSE, include = FALSE}
-# probabilities
-# proportion of population immune
-p_imm <- 0.5
-# infection rate (1-4% during nonepidemic years, 10-15% during epidemic years)
-p_inf <- 0.15
-# proportion of maternal infections detected
-p_det <- 0.5
-p_und <- 1 - p_det
-# probability of fetus developing severe fetal anemia
-p_sfa <- 0.021
-# probability of transfusion in detected
-p_det_it <- 0.95
-#probability of transfusion in undetected
-p_und_it <- 0.8
-# probability of live birth
-p_lb <- 0.9
-# probability of live birth if mother undetected and severe fetal anemia
-p_und_sfa_lb <- 0.722
-# probability of live birth if mother detected and severe fetal anemia
-p_det_sfa_lb <- 0.807
-# population size
-pop_size <- 3600000
-
-
-
-# Count of Mothers infected in first 20 weeks of pregnancy
-tot_inf <- pop_size * p_imm * p_inf 
-# Number of severe fetal anemia cases
-tot_sfa <- (pop_size * p_imm * p_inf * p_det * p_sfa) +
-  (pop_size * p_imm * p_inf * (1-p_det) * p_sfa)
-# Number of transfusions
-tot_tra <- (pop_size * p_imm * p_inf * p_det * p_sfa * p_det_it) +
-  (pop_size * p_imm * p_inf * (1-p_det) * p_sfa * p_und_it)
-# Number of Fetal Deaths due to Parvovirus B19 detected
-tot_det_fd <- pop_size * (((1-p_imm)*p_inf*p_det*p_sfa*p_det_it*(1-p_det_sfa_lb)) +
-  ((1-p_imm)*p_inf*p_det*p_sfa*(1-p_det_it)*(1-p_det_sfa_lb)) +
-  ((1-p_imm)*p_inf*(1-p_det)*p_sfa*p_und_it*(1-p_und_sfa_lb)) +
-  ((1-p_imm)*p_inf*(1-p_det)*p_sfa*(1-p_und_it)*(1-p_und_sfa_lb)))
-
-# Number of Fetal Deaths due to Parvovirus B19 undetected
-tot_und_fd <- pop_size * (((1-p_imm)*p_inf*p_und*p_sfa*p_det_it*(1-p_det_sfa_lb)) +
-  ((1-p_imm)*p_inf*p_und*p_sfa*(1-p_det_it)*(1-p_det_sfa_lb)) +
-  ((1-p_imm)*p_inf*(1-p_und)*p_sfa*p_und_it*(1-p_und_sfa_lb)) +
-  ((1-p_imm)*p_inf*(1-p_und)*p_sfa*(1-p_und_it)*(1-p_und_sfa_lb)))
-
-# total deaths averted
-tot_deaths <- tot_det_fd + tot_und_fd
-tot_ave <- tot_det_fd - tot_und_fd
-
-
-```
