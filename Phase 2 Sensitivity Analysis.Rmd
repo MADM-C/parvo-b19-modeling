@@ -255,7 +255,8 @@ run_tree <- function(l_params_all) {
                               Total_Deaths  =  total_death_surv,
                               B19_Deaths_SQ = total_pvb_deaths_sq,
                               B19_Deaths_Surv = total_pvb_deaths_surv,
-                              Deaths_Averted = total_death_sq - total_death_surv, 
+                              Deaths_Averted = total_death_sq - total_death_surv,
+                              IUTs_Total = total_it_sq + total_it_surv,
                               IUTs_SQ = total_it_sq,
                               IUTs_Surv = total_it_surv)
      return(df_output)})
@@ -278,8 +279,6 @@ base_case
 ```
 ***
 ```{r, warning = FALSE}
-# one way sensitivity analysis
-base_case <- sa(l_params_all)
 # disable scientific notation
 options(scipen = 999) 
 # varying immunity, infection rate, and detection rate
@@ -296,7 +295,7 @@ owsa_cost <- run_owsa_det(params_range = df_params_owsa,
                          # number of param values
                          nsamp      = 100, 
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
                          outcomes = c('Cost'),
                          # names of the strategies
@@ -311,16 +310,16 @@ torn_cost <- owsa_tornado(owsa = owsa_cost) +
   scale_x_discrete(labels = xa_cost)
 torn_cost
 
-# owsa for deaths
+# owsa for SQ B19 deaths
 owsa_deaths <- run_owsa_det(params_range = df_params_owsa,  
                          # list of all params
                          params_basecase = l_params_all, 
                          # number of param values
                          nsamp      = 100, 
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Parvovirus'),
+                         outcomes = c('B19_Deaths_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)   
@@ -336,16 +335,16 @@ torn_deaths
 ggsave("torn_deaths.png",
        plot = torn_deaths)
 
-# owsa for transfusions
+# owsa for SQ transfusions
 owsa_transfusions <- run_owsa_det(params_range = df_params_owsa,  
                          # list of all params
                          params_basecase = l_params_all, 
                          # number of param values
                          nsamp      = 100, 
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Transfusions'),
+                         outcomes = c('IUTs_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)   
@@ -361,16 +360,16 @@ torn_transfusions
 ggsave("torn_transfusions.png",
        plot = torn_transfusions)
 
-# owsa for averted
+# owsa for deaths averted
 owsa_averted <- run_owsa_det(params_range = df_params_owsa,  
                          # list of all params
                          params_basecase = l_params_all, 
                          # number of param values
                          nsamp      = 100, 
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Averted'),
+                         outcomes = c('Deaths_Averted'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)   
