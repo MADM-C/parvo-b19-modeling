@@ -284,9 +284,9 @@ options(scipen = 999)
 # varying immunity, infection rate, and detection rate
 df_params_owsa <- data.frame(pars = c("p_imm", "p_inf", "p_det_surv"),
                              # min parameter values
-                             min  = c(0.25, 0.01, 0.1), 
+                             min  = c(0.25, 0, 0.05), 
                              # max parameter values
-                             max  = c(0.75, 0.20, 0.5)
+                             max  = c(0.75, 0.10, 0.5)
                              )
 # owsa for cost
 owsa_cost <- run_owsa_det(params_range = df_params_owsa,  
@@ -390,9 +390,9 @@ torn_averted
 
 df_params_twsa <- data.frame(pars = c("p_imm", "p_inf"),
                               # min parameter values
-                              min  = c(0.25, 0.01), 
+                              min  = c(0.25, 0), 
                               # max parameter values
-                              max  = c(0.75, 0.20) 
+                              max  = c(0.75, 0.1) 
                               )
 # # twsa dataframes for immunity and infection rate
 # twsa_cost <- run_twsa_det(params_range = df_params_twsa, 
@@ -414,9 +414,9 @@ twsa_deaths <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Parvovirus'),
+                         outcomes = c('B19_Deaths_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -427,9 +427,9 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Transfusions'),
+                         outcomes = c('IUTs_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -440,9 +440,9 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Averted'),
+                         outcomes = c('Deaths_Averted'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -516,7 +516,7 @@ ggsave("heat_averted_ii.png",
 
 df_params_twsa <- data.frame(pars = c("p_imm", "p_det_surv"),
                               # min parameter values
-                              min  = c(0.25, 0.1), 
+                              min  = c(0.25, 0.05), 
                               # max parameter values
                               max  = c(0.75, 0.5) 
                               )
@@ -540,9 +540,9 @@ twsa_deaths <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Parvovirus'),
+                         outcomes = c('B19_Deaths_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -553,9 +553,9 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Transfusions'),
+                         outcomes = c('IUTs_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -566,9 +566,9 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Averted'),
+                         outcomes = c('Deaths_Averted'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -637,9 +637,9 @@ heat_averted_id
 
 df_params_twsa <- data.frame(pars = c("p_det_surv", "p_inf"),
                               # min parameter values
-                              min  = c(0.1, 0.01), 
+                              min  = c(0.05, 0), 
                               # max parameter values
-                              max  = c(0.5, 0.20) 
+                              max  = c(0.5, 0.1) 
                               )
 # # twsa dataframes for detection rate and infection rate
 # twsa_cost <- run_twsa_det(params_range = df_params_twsa, 
@@ -661,9 +661,9 @@ twsa_deaths <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Parvovirus'),
+                         outcomes = c('B19_Deaths_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -674,9 +674,9 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Transfusions'),
+                         outcomes = c('IUTs_SQ'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -687,9 +687,9 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
                          # number of parameter values
                          nsamp      = 10,               
                          # function to compute outputs
-                         FUN        = sa, 
+                         FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Averted'),
+                         outcomes = c('Deaths_Averted'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
