@@ -768,6 +768,18 @@ df_params_twsa <- data.frame(pars = c("p_det_surv", "p_und_it"),
                               # max parameter values
                               max  = c(0.5, 1.0) 
                               )
+twsa_deaths <- run_twsa_det(params_range = df_params_twsa, 
+                         # list with all parameters
+                         params_basecase = l_params_all,
+                         # number of parameter values
+                         nsamp      = 10,               
+                         # function to compute outputs
+                         FUN        = run_tree, 
+                         # outcomes
+                         outcomes = c('B19_Deaths_Surv'),
+                         # names of the strategies
+                         strategies = v_names_str,
+                         progress = FALSE)
 
 twsa_transfusions <- run_twsa_det(params_range = df_params_twsa, 
                          # list with all parameters
@@ -794,6 +806,22 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
+
+twsa_deaths <- data.matrix(twsa_deaths)
+heat_deaths_dt <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
+                                                  y = p_inf,
+                                                  fill = outcome_val)) +
+  geom_tile() +
+  xlab(label = 'Detection Rate') +
+  ylab(label = 'Infection Rate') +
+  ggtitle("PVB19-Associated Deaths over Varying Detection Rates and Infection Rates") +
+  scale_fill_viridis(option = "turbo", alpha = 0.55) +
+  geom_text(aes(label = round(outcome_val, 0))) +
+  guides(fill=guide_legend(title="Parvovirus Deaths"))
+
+heat_deaths_dt
+ggsave("heat_deaths_dt.png",
+       plot = heat_deaths_dt)
 
 
 twsa_transfusions <- data.matrix(twsa_transfusions)
