@@ -284,9 +284,9 @@ options(scipen = 999)
 # varying immunity, infection rate, and detection rate
 df_params_owsa <- data.frame(pars = c("p_imm", "p_inf", "p_det_surv", "p_sfa", "p_und_it"),
                              # min parameter values
-                             min  = c(0.25, 0, 0.05, 0, 0.6), 
+                             min  = c(0.25, 0, 0.05, 0.02, 0.6), 
                              # max parameter values
-                             max  = c(0.75, 0.10, 0.5, 0.1, 1)
+                             max  = c(0.75, 0.1, 0.5, 0.1, 1)
                              )
 # owsa for cost
 # owsa_cost <- run_owsa_det(params_range = df_params_owsa,  
@@ -809,7 +809,7 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
 
 twsa_deaths <- data.matrix(twsa_deaths)
 heat_deaths_dt <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
-                                                  y = p_inf,
+                                                  y = p_und_it,
                                                   fill = outcome_val)) +
   geom_tile() +
   xlab(label = 'Detection Rate') +
@@ -863,7 +863,7 @@ ggsave("heat_averted_dt.png",
 
 df_params_twsa <- data.frame(pars = c("p_det_surv", "p_sfa"),
                               # min parameter values
-                              min  = c(0.05, 0), 
+                              min  = c(0.05, 0.02), 
                               # max parameter values
                               max  = c(0.5, 0.1) 
                               )
@@ -907,52 +907,52 @@ twsa_averted <- run_twsa_det(params_range = df_params_twsa,
                          progress = FALSE)
 
 twsa_deaths <- data.matrix(twsa_deaths)
-heat_deaths_dt <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
-                                                  y = p_inf,
+heat_deaths_ds <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
+                                                  y = p_sfa,
                                                   fill = outcome_val)) +
   geom_tile() +
   xlab(label = 'Detection Rate') +
-  ylab(label = 'Infection Rate') +
-  ggtitle("PVB19-Associated Deaths over Varying Detection Rates and Infection Rates") +
+  ylab(label = 'Severe Fetal Anemia Rate') +
+  ggtitle("PVB19-Associated Deaths over Varying Detection Rates and Severe Fetal Anemia Rates") +
   scale_fill_viridis(option = "turbo", alpha = 0.55) +
   geom_text(aes(label = round(outcome_val, 0))) +
   guides(fill=guide_legend(title="Parvovirus Deaths"))
 
-heat_deaths_dt
-ggsave("heat_deaths_dt.png",
-       plot = heat_deaths_dt)
+heat_deaths_ds
+ggsave("heat_deaths_ds.png",
+       plot = heat_deaths_ds)
 
 
 twsa_transfusions <- data.matrix(twsa_transfusions)
-heat_transfusions_dt <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det_surv,
-                                                  y = p_und_it,
+heat_transfusions_ds <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det_surv,
+                                                  y = p_sfa,
                                                   fill = outcome_val)) +
   geom_tile() +
   xlab(label = 'Detection Rate') +
-  ylab(label = 'Transfusion Rate in Undetected') +
-  ggtitle("Transfusions over Varying Detection Rates and Transfusion Rate") +
+  ylab(label = 'Severe Fetal Anemia Rate') +
+  ggtitle("Transfusions over Varying Detection Rates and Severe Fetal Anemia Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.55) +
   geom_text(aes(label = round(outcome_val, 0))) +
   guides(fill=guide_legend(title="Transfusions"))
 
-heat_transfusions_dt
-ggsave("heat_transfusions_dt.png",
-        plot = heat_transfusions_dt)
+heat_transfusions_ds
+ggsave("heat_transfusions_ds.png",
+        plot = heat_transfusions_ds)
 
 twsa_averted <- data.matrix(twsa_averted)
-heat_averted_dt <- ggplot(data = twsa_averted, mapping = aes(x = p_det_surv,
-                                                  y = p_und_it,
+heat_averted_ds <- ggplot(data = twsa_averted, mapping = aes(x = p_det_surv,
+                                                  y = p_sfa,
                                                   fill = outcome_val)) +
   geom_tile() +
   xlab(label = 'Detection Rate') +
-  ylab(label = 'Transfusion Rate in Undetected') +
-  ggtitle("Deaths Averted over Varying Detection Rates and Transfusion Rate") +
+  ylab(label = 'Severe Fetal Anemia Rate') +
+  ggtitle("Deaths Averted over Varying Detection Rates and Severe Fetal Anemia Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.55) +
   geom_text(aes(label = round(outcome_val, 0))) +
   guides(fill=guide_legend(title="Deaths Averted"))
 
-heat_averted_dt
-ggsave("heat_averted_dt.png",
-       plot = heat_averted_dt)
+heat_averted_ds
+ggsave("heat_averted_ds.png",
+       plot = heat_averted_ds)
 ```
 ***
