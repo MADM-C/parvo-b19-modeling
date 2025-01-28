@@ -319,7 +319,7 @@ owsa_deaths <- run_owsa_det(params_range = df_params_owsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('B19_Deaths_SQ'),
+                         outcomes = c('B19_Deaths_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)   
@@ -344,7 +344,7 @@ owsa_transfusions <- run_owsa_det(params_range = df_params_owsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('IUTs_SQ'),
+                         outcomes = c('IUTs_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)   
@@ -416,7 +416,7 @@ twsa_deaths <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('B19_Deaths_SQ'),
+                         outcomes = c('B19_Deaths_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -429,7 +429,7 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('IUTs_SQ'),
+                         outcomes = c('IUTs_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -542,7 +542,7 @@ twsa_deaths <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('B19_Deaths_SQ'),
+                         outcomes = c('B19_Deaths_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -555,7 +555,7 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('IUTs_SQ'),
+                         outcomes = c('IUTs_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -663,7 +663,7 @@ twsa_deaths <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('B19_Deaths_SQ'),
+                         outcomes = c('B19_Deaths_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -676,7 +676,7 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('IUTs_SQ'),
+                         outcomes = c('IUTs_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
@@ -777,7 +777,7 @@ twsa_transfusions <- run_twsa_det(params_range = df_params_twsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('IUTs_SQ'),
+                         outcomes = c('IUTs_Surv'),
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)
