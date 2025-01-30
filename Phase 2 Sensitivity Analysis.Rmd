@@ -2,8 +2,11 @@
 title: "Phase 2 Sensitivity Analysis"
 author: "Ritesh Sivakumar"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
+
 ```{r, echo = FALSE, include = FALSE}
 # Clear environment
 #rm(list=ls())
@@ -17,15 +20,13 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",
 
 ```
 ***
-
-
 ```{r}
 # load params
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Surveillance")
 n_str <- length(v_names_str)
 ```
-
+***
 ```{r}
 # load base case estimates
 base_case_raw <- phase2_model(l_params_all)
@@ -37,7 +38,7 @@ base_case_final[, 5] <- as.numeric(base_case_final[, 2]) - as.numeric(base_case_
 base_case_final[, 6] <- as.numeric(base_case_final[, 3]) - as.numeric(base_case_final[1, 3])
 base_case_final
 ```
-
+***
 ```{r, warning = FALSE}
 # one way sensitivity analyses
 # disable scientific notation
@@ -119,6 +120,7 @@ plot(owsa_results$owsa_Transfusions) +
   ylab("Expected Transfusions")
 
 ```
+***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of immunity and infection rates
 df_params_twsa <- data.frame(pars = c("p_imm", "p_inf"),
@@ -186,6 +188,7 @@ heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
 heat_transfusions_ii
 
 ```
+***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of immunity and infection rates
 df_params_twsa <- data.frame(pars = c("p_imm", "p_det_surv"),
@@ -253,7 +256,7 @@ heat_transfusions_id <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
 heat_transfusions_id
 
 ```
-
+***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of immunity and infection rates
 df_params_twsa <- data.frame(pars = c("p_det_surv", "p_inf"),
@@ -321,6 +324,7 @@ heat_transfusions_di <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
 heat_transfusions_di
 
 ```
+***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of immunity and infection rates
 df_params_twsa <- data.frame(pars = c("p_det_surv", "p_und_it"),
@@ -388,6 +392,7 @@ heat_transfusions_dt <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
 heat_transfusions_dt
 
 ```
+***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of immunity and infection rates
 df_params_twsa <- data.frame(pars = c("p_det_surv", "p_sfa"),
@@ -424,7 +429,7 @@ heat_deaths_ds <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Rate') +
   ylab(label = 'Severe Fetal Anemia Rate') +
-  ggtitle("Deaths Averted over Varying Detection Rate and Severe Fetal Anemia Rate") +
+  ggtitle("Deaths Averted over Varying Detection Rate and SFA Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Deaths Averted")) +
   theme_bw() +
@@ -446,7 +451,7 @@ heat_transfusions_ds <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Rate') +
   ylab(label = 'Severe Fetal Anemia Rate') +
-  ggtitle("Transfusions Averted over Varying Detection Rate and Severe Fetal Anemia Rate") +
+  ggtitle("Transfusions Averted over Varying Detection Rate and SFA Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
   theme_bw() +
@@ -454,11 +459,4 @@ heat_transfusions_ds <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
 
 heat_transfusions_ds
 ```
-
-
-
-
-
-
-
-
+***
