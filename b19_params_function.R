@@ -4,7 +4,7 @@ load_params <- function() {
     ### Transition probabilities
     ## Natural history parameters
     # proportion of population immune
-    p_imm     = 0.50,
+    p_imm     = 0.5,
     # infection rate (1-4% during nonepidemic years, 10-15% during epidemic years)
     p_inf    = 0.01,
     ## Clinical parameters
