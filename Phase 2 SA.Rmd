@@ -1,0 +1,267 @@
+---
+title: "Phase 2 Sensitivity Analysis"
+author: "Ritesh Sivakumar"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r, echo = FALSE, include = FALSE}
+# Clear environment
+#rm(list=ls())
+
+# R Packages
+if (!require('pacman')) install.packages('pacman'); library(pacman) 
+p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",  
+       "ggraph", "reshape2", "knitr", "stringr", "jsonlite", 
+       "rstudioapi", "tidyverse", "dampack", "data.table", 
+       "tornado", "ggplot2", "viridis")                
+
+```
+***
+
+
+```{r}
+# load params
+l_params_all <- load_params()
+v_names_str <- c("Status Quo", "Surveillance")
+n_str <- length(v_names_str)
+```
+
+```{r}
+# load base case estimates
+base_case_raw <- phase2_model(l_params_all)
+
+base_case_final <- base_case_raw %>% mutate(Inc_B19_Deaths = NA) %>%
+  mutate(Inc_Transfusions = NA) %>%as.matrix()
+# Incremental Deaths and Transfusions
+base_case_final[, 5] <- as.numeric(base_case_final[, 2]) - as.numeric(base_case_final[1, 2])
+base_case_final[, 6] <- as.numeric(base_case_final[, 3]) - as.numeric(base_case_final[1, 3])
+base_case_final
+```
+
+```{r, warning = FALSE}
+# one way sensitivity analyses
+# disable scientific notation
+options(scipen = 999) 
+
+# varying infection rate, and detection rate
+df_params_owsa <- data.frame(pars = c("p_imm", "p_inf", 
+                                      "p_det_surv", "p_sfa",
+                                      "p_und_it"),
+                             # min parameter values
+                             min  = c(0.25, 0, 0.05, 0, 0.6), 
+                             # max parameter values
+                             max  = c(0.75, 0.1, 0.5, 0.1, 1)
+                             )
+# OWSA
+owsa_results <- run_owsa_det(params_range = df_params_owsa,  
+                             # list of all params
+                             params_basecase = l_params_all, 
+                             # number of param values
+                             nsamp      = 100, 
+                             # function to compute outputs
+                             FUN        = phase2_model, 
+                             # outcomes
+                             outcomes = c('Deaths', 'B19_Deaths', 'Transfusions'),
+                             # names of the strategies
+                             strategies = v_names_str,
+                             progress = FALSE)
+
+# one way plots
+# total deaths
+owsa_results$owsa_Deaths <- owsa_results$owsa_Deaths %>%
+  mutate(parameter = ifelse(parameter == "p_imm", 
+                            "Proportion Immune",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Rate",
+                                   ifelse(parameter == "p_det_surv", 
+                                          "Detection Rate in Surveillance",
+                                          ifelse(parameter == "p_sfa", 
+                                                 "Severe Fetal Anemia Rate",
+                                                 ifelse(parameter == "p_und_it", 
+                                                        "Transfusion Rate in Undetected",
+                                                        parameter))))))
+
+plot(owsa_results$owsa_Deaths) +
+  ylab("Expected Deaths")
+
+# b19 deaths                                   
+owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
+  mutate(parameter = ifelse(parameter == "p_imm", 
+                            "Proportion Immune",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Rate",
+                                   ifelse(parameter == "p_det_surv", 
+                                          "Detection Rate in Surveillance",
+                                          ifelse(parameter == "p_sfa", 
+                                                 "Severe Fetal Anemia Rate",
+                                                 ifelse(parameter == "p_und_it", 
+                                                        "Transfusion Rate in Undetected",
+                                                        parameter))))))
+
+plot(owsa_results$owsa_B19_Deaths) +
+  ylab("Expected B19 Deaths")
+ 
+# expected transfusions
+owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
+  mutate(parameter = ifelse(parameter == "p_imm", 
+                            "Proportion Immune",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Rate",
+                                   ifelse(parameter == "p_det_surv", 
+                                          "Detection Rate in Surveillance",
+                                          ifelse(parameter == "p_sfa", 
+                                                 "Severe Fetal Anemia Rate",
+                                                 ifelse(parameter == "p_und_it", 
+                                                        "Transfusion Rate in Undetected",
+                                                        parameter))))))
+
+plot(owsa_results$owsa_Transfusions) +
+  ylab("Expected Transfusions")
+
+```
+```{r, warning = FALSE}
+# two way sensitivity analysis of immunity and infection rates
+df_params_twsa <- data.frame(pars = c("p_imm", "p_inf"),
+                              # min parameter values
+                              min  = c(0.25, 0), 
+                              # max parameter values
+                              max  = c(0.75, 0.1) 
+                              )
+# twsa dataframes for immunity and infection rate
+twsa_results <- run_twsa_det(params_range = df_params_twsa, 
+                             # list with all parameters
+                             params_basecase = l_params_all,
+                             # number of parameter values
+                             nsamp      = 10,               
+                             # function to compute outputs
+                             FUN        = phase2_model, 
+                             # outcomes
+                             outcomes = c('Deaths', 'B19_Deaths', 'Transfusions'),
+                             # names of the strategies
+                             strategies = v_names_str,
+                             progress = FALSE)
+
+# sensitivity analysis of deaths averted and plot
+twsa_deaths    <- twsa_results$twsa_Deaths %>%
+  pivot_wider(names_from = strategy,
+              values_from = outcome_val) %>%
+  mutate(incremental = Status.Quo - Surveillance) %>%
+  as.matrix()
+
+heat_deaths_ii <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
+                                                  y = p_inf,
+                                                  fill = incremental)) +
+  geom_tile() +
+  geom_text(aes(label = round(incremental, 0))) +
+  xlab(label = 'Proportion Immune') +
+  ylab(label = 'Infection Rate') +
+  ggtitle("Deaths Averted over Varying % Immune and Infection Rate") +
+  scale_fill_viridis(option = "turbo", alpha = 0.8) +
+  guides(fill=guide_legend(title="Deaths Averted")) +
+  theme_bw() +
+  theme(legend.position = "none")
+
+heat_deaths_ii
+
+# sensitivity analysis of transfusions averted and plot
+twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
+  pivot_wider(names_from = strategy,
+              values_from = outcome_val) %>%
+  mutate(incremental = Status.Quo - Surveillance) %>%
+  as.matrix()
+
+heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm,
+                                                  y = p_inf,
+                                                  fill = incremental)) +
+  geom_tile() +
+  geom_text(aes(label = round(incremental, 0))) +
+  xlab(label = 'Proportion Immune') +
+  ylab(label = 'Infection Rate') +
+  ggtitle("Transfusions Averted over Varying % Immune and Infection Rate") +
+  scale_fill_viridis(option = "turbo", alpha = 0.8) +
+  guides(fill=guide_legend(title="Transfusions Averted")) +
+  theme_bw() +
+  theme(legend.position = "none")
+
+heat_transfusions_ii
+
+```
+```{r, warning = FALSE}
+# two way sensitivity analysis of immunity and infection rates
+df_params_twsa <- data.frame(pars = c("p_imm", "p_det_surv"),
+                              # min parameter values
+                              min  = c(0.25, 0.05), 
+                              # max parameter values
+                              max  = c(0.75, 0.5) 
+                              )
+# twsa dataframes for immunity and infection rate
+twsa_results <- run_twsa_det(params_range = df_params_twsa, 
+                             # list with all parameters
+                             params_basecase = l_params_all,
+                             # number of parameter values
+                             nsamp      = 10,               
+                             # function to compute outputs
+                             FUN        = phase2_model, 
+                             # outcomes
+                             outcomes = c('Deaths', 'B19_Deaths', 'Transfusions'),
+                             # names of the strategies
+                             strategies = v_names_str,
+                             progress = FALSE)
+
+# sensitivity analysis of deaths averted and plot
+twsa_deaths    <- twsa_results$twsa_Deaths %>%
+  pivot_wider(names_from = strategy,
+              values_from = outcome_val) %>%
+  mutate(incremental = Status.Quo - Surveillance) %>%
+  as.matrix()
+
+heat_deaths_id <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
+                                                  y = p_det_surv,
+                                                  fill = incremental)) +
+  geom_tile() +
+  geom_text(aes(label = round(incremental, 0))) +
+  xlab(label = 'Proportion Immune') +
+  ylab(label = 'Detection Rate') +
+  ggtitle("Deaths Averted over Varying % Immune and Detection Rate") +
+  scale_fill_viridis(option = "turbo", alpha = 0.8) +
+  guides(fill=guide_legend(title="Deaths Averted")) +
+  theme_bw() +
+  theme(legend.position = "none")
+
+heat_deaths_id
+
+# sensitivity analysis of transfusions averted and plot
+twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
+  pivot_wider(names_from = strategy,
+              values_from = outcome_val) %>%
+  mutate(incremental = Status.Quo - Surveillance) %>%
+  as.matrix()
+
+heat_transfusions_id <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm,
+                                                  y = p_det_surv,
+                                                  fill = incremental)) +
+  geom_tile() +
+  geom_text(aes(label = round(incremental, 0))) +
+  xlab(label = 'Proportion Immune') +
+  ylab(label = 'Detection Rate') +
+  ggtitle("Transfusions Averted over Varying % Immune and Detection Rate") +
+  scale_fill_viridis(option = "turbo", alpha = 0.8) +
+  guides(fill=guide_legend(title="Transfusions Averted")) +
+  theme_bw() +
+  theme(legend.position = "none")
+
+heat_transfusions_id
+
+```
+
+
+
+
+
+
+
+
+
+
+
+

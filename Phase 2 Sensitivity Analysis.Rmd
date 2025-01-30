@@ -258,7 +258,8 @@ run_tree <- function(l_params_all) {
                               Deaths_Averted = total_death_sq - total_death_surv,
                               IUTs_Total = total_it_sq + total_it_surv,
                               IUTs_SQ = total_it_sq,
-                              IUTs_Surv = total_it_surv)
+                              IUTs_Surv = total_it_surv,
+                              Transfusions_Averted = )
      return(df_output)})
 }
 
@@ -369,19 +370,28 @@ owsa_averted <- run_owsa_det(params_range = df_params_owsa,
                          # function to compute outputs
                          FUN        = run_tree, 
                          # outcomes
-                         outcomes = c('Deaths_Averted'),
+                         outcomes = c('Deaths_Averted', 'B19_Deaths_Surv'), 
                          # names of the strategies
                          strategies = v_names_str,
                          progress = FALSE)   
 # tornado plot
 # axis labels for tornado plots
-#xa_averted <- c("Detection Rate", "Proportion Immune", "Infection Rate", "Severe Fetal Anemia Rate", "Transfusion Rate in Undetected")
-
-torn_averted <- owsa_tornado(owsa = owsa_averted) + 
+torn_averted0 <- owsa_tornado(owsa = owsa_averted$outcome_val == 'Deaths_Averted') + 
   labs(x="Varied Parameters", y = "Deaths Averted")  +
   ggtitle("One-Way SA of Deaths Averted") 
   #scale_x_discrete(labels = xa_averted)
+torn_averted0
+
+
+xa_averted <- c("Undetected", "Proportion Immune", "Detection Rate", "Severe Fetal Anemia Rate", "Infection Rate")
+
+torn_averted <- owsa_tornado(owsa = owsa_averted) + 
+  labs(x="Varied Parameters", y = "Deaths Averted")  +
+  ggtitle("One-Way SA of Deaths Averted") +
+  scale_x_discrete(labels = xa_averted)
 torn_averted
+
+# Mutate variable names in the owsa object!!
 
 ```
 ***
@@ -655,18 +665,18 @@ df_params_twsa <- data.frame(pars = c("p_det_surv", "p_inf"),
 #                          strategies = v_names_str,
 #                          progress = FALSE)
 
-twsa_deaths <- run_twsa_det(params_range = df_params_twsa, 
-                         # list with all parameters
-                         params_basecase = l_params_all,
-                         # number of parameter values
-                         nsamp      = 10,               
-                         # function to compute outputs
-                         FUN        = run_tree, 
-                         # outcomes
-                         outcomes = c('B19_Deaths_Surv'),
-                         # names of the strategies
-                         strategies = v_names_str,
-                         progress = FALSE)
+# twsa_deaths <- run_twsa_det(params_range = df_params_twsa, 
+#                          # list with all parameters
+#                          params_basecase = l_params_all,
+#                          # number of parameter values
+#                          nsamp      = 10,               
+#                          # function to compute outputs
+#                          FUN        = run_tree, 
+#                          # outcomes
+#                          outcomes = c('B19_Deaths_Surv'),
+#                          # names of the strategies
+#                          strategies = v_names_str,
+#                          progress = FALSE)
 
 twsa_transfusions <- run_twsa_det(params_range = df_params_twsa, 
                          # list with all parameters
