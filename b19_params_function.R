@@ -5,7 +5,7 @@ load_params <- function() {
     ## Natural history parameters
     # proportion of population immune
     p_imm     = 0.5,
-    # infection rate (1-4% during nonepidemic years, 10-15% during epidemic years)
+    # infection rate (0.5-2% during nonepidemic years, 5-10% during epidemic years)
     p_inf    = 0.01,
     ## Clinical parameters
     # proportion of maternal infections detected
@@ -92,7 +92,7 @@ load_params <- function() {
     n_nt = 0,
     
     # population parameters
-    pop_size = 65000
+    pop_size = 3600000
   )
   
   return(l_params)

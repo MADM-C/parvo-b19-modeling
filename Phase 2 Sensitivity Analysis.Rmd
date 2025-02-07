@@ -109,15 +109,53 @@ owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Rate",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Rate in Surveillance",
+                                          "Detection Rate in Surv",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Rate",
                                                  ifelse(parameter == "p_und_it", 
-                                                        "Transfusion Rate in Undetected",
+                                                        "Transfusion Rate in Undet.",
                                                         parameter))))))
 
 plot(owsa_results$owsa_Transfusions) +
   ylab("Expected Transfusions")
+
+
+## One-way plot for manuscript
+# varying infection rate, and detection rate
+df_params_owsa <- data.frame(pars = c("p_imm", "p_inf", 
+                                      "p_det_surv"),
+                             # min parameter values
+                             min  = c(0.25, 0, 0.05), 
+                             # max parameter values
+                             max  = c(0.75, 0.1, 0.5)
+                             )
+# OWSA
+owsa_results <- run_owsa_det(params_range = df_params_owsa,  
+                             # list of all params
+                             params_basecase = l_params_all, 
+                             # number of param values
+                             nsamp      = 100, 
+                             # function to compute outputs
+                             FUN        = phase2_model, 
+                             # outcomes
+                             outcomes = c('Deaths', 'B19_Deaths', 'Transfusions'),
+                             # names of the strategies
+                             strategies = v_names_str,
+                             progress = FALSE)
+# b19 deaths                                   
+owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
+  mutate(parameter = ifelse(parameter == "p_imm", 
+                            "Proportion Immune",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Rate",
+                                   ifelse(parameter == "p_det_surv", 
+                                          "Detection Rate in Surv",
+                                                        parameter))))
+
+plot(owsa_results$owsa_B19_Deaths) +
+  ylab("Expected B19 Deaths")
+ 
+
 
 ```
 ***
