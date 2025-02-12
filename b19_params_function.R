@@ -17,11 +17,11 @@ load_params <- function() {
     # probability of fetus developing severe fetal anemia
     p_sfa      = 0.075,
     # probability of transfusion given
-    p_det_it    = 0.95,  # maternal infection detected
-    p_und_it    = 0.80,  # maternal infection undetected
+    p_det_it    = (0.95)*(0.2),  # maternal infection detected
+    p_und_it    = (0.80)*(0.2),  # maternal infection undetected
     
     # probability of b19 fetal death being stillbirth
-    p_sb = 0.13 
+    p_sb = 0.13, 
     
     # probability of live birth
     p_lb        = 0.9,
