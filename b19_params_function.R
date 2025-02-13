@@ -16,7 +16,7 @@ load_params <- function() {
     p_det_imm  = 0.05, # probability of detection if assumed immune at first visit
     # probability of fetus developing severe fetal anemia
     p_sfa      = 0.075,
-    # probability of transfusion given
+    # probability of transfusion given, alongside probability of fetus being at gestational age for transfusion (20%)
     p_det_it    = (0.95)*(0.2),  # maternal infection detected
     p_und_it    = (0.80)*(0.2),  # maternal infection undetected
     
