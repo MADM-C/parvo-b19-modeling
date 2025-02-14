@@ -5,18 +5,20 @@ parvo_model <- function(l_params_all) {
     {
       # p_inf_10 <- p_inf_20 <- p_inf / 2
       p_inf_10 <- p_inf_20 <- (1 - sqrt(1 - p_inf))
+      p_inf_pre16 <- 2 - sqrt(4 - 3 * p_inf)
+      p_inf_post16 <- p_inf_pre16 / 3
       # vector of weights for each policy
       # status quo vector
       v_w_sq <- c((1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * p_det_it       * p_det_sfa_lb,
                   (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-                  (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-                  (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+                  (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+                  (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
                   (1 - p_imm) * p_inf       * p_det_sq       * (1 - p_sfa) * p_lb,
                   (1 - p_imm) * p_inf       * p_det_sq       * (1 - p_sfa) * (1 - p_lb),
                   (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * p_und_it       * p_und_sfa_lb,
                   (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-                  (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-                  (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+                  (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+                  (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
                   (1 - p_imm) * p_inf       * (1 - p_det_sq) * (1 - p_sfa) * p_lb,
                   (1 - p_imm) * p_inf       * (1 - p_det_sq) * (1 - p_sfa) * (1 - p_lb),
                   (1 - p_imm) * (1 - p_inf) * p_lb,
@@ -31,22 +33,22 @@ parvo_model <- function(l_params_all) {
         # TP PCR
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * (1 - p_sfa)   * p_lb,
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * (1 - p_sfa)   * (1 - p_lb),
         # FN PCR
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * (1 - p_sfa)   * p_lb,
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * (1 - p_sfa)   * (1 - p_lb),
         ## FN IgM
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * (1 - p_sfa) * p_lb,
         (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * (1 - p_sfa) * (1 - p_lb),
         ### Susceptible, current or recent infection, FN IgG
@@ -54,22 +56,22 @@ parvo_model <- function(l_params_all) {
         # TP PCR
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * (1 - p_sfa) * p_lb,
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * (1 - p_sfa) * (1 - p_lb),
         # FN PCR
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * p_und_it       * p_det_sfa_lb,
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * p_und_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * (1 - p_sfa) * p_lb,
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * (1 - p_sfa) * (1 - p_lb),
         ## FN IgM
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * (1 - p_sfa) * p_lb,
         (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * (1 - p_sfa) * (1 - p_lb),
         ### Susceptible, no infection at first visit, FP IgG
@@ -77,14 +79,14 @@ parvo_model <- function(l_params_all) {
         # FP PCR
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa)   * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa)   * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * (1 - p_inf_20) * p_lb,
@@ -92,14 +94,14 @@ parvo_model <- function(l_params_all) {
         # TN PCR
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * (1 - p_sfa)   * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * (1 - p_sfa)   * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * (1 - p_inf_20) * p_lb,
@@ -107,14 +109,14 @@ parvo_model <- function(l_params_all) {
         ## TN IgM
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * (1 - p_sfa)    * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * (1 - p_sfa)    * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * (1 - p_inf_20)   * p_lb,
@@ -124,14 +126,14 @@ parvo_model <- function(l_params_all) {
         # FP PCR
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa) * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa) * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa) * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa) * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * (1 - p_inf_20) * p_lb,
@@ -139,14 +141,14 @@ parvo_model <- function(l_params_all) {
         # TN PCR
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * (1 - p_sfa) * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * (1 - p_sfa) * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * (1 - p_sfa) * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * (1 - p_sfa) * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * (1 - p_inf_20) * p_lb,
@@ -154,14 +156,14 @@ parvo_model <- function(l_params_all) {
         ## TN IgM
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * p_det_it       * p_det_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * (1 - p_sfa)    * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * p_und_it       * p_und_sfa_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * (1 - p_sfa)    * p_lb,
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * (1 - p_inf_20)   * p_lb,
@@ -192,14 +194,14 @@ parvo_model <- function(l_params_all) {
 
       v_w_vax <- c(p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * p_det_it       * p_det_sfa_lb,
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * (1 - p_sfa) * p_lb,
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * p_det_sq       * (1 - p_sfa) * (1 - p_lb),
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * p_und_it       * p_und_sfa_lb,
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+                   p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * (1 - p_sfa) * p_lb,
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf       * (1 - p_det_sq) * (1 - p_sfa) * (1 - p_lb),
                    p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf) * p_lb,
@@ -210,14 +212,14 @@ parvo_model <- function(l_params_all) {
                    p_vax       * p_imm           * (1 - p_lb),
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * p_sfa       * p_det_it       * p_det_sfa_lb,
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-                   (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-                   (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+                   (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+                   (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * (1 - p_sfa) * p_lb,
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * p_det_sq       * (1 - p_sfa) * (1 - p_lb),
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * p_sfa       * p_und_it       * p_und_sfa_lb,
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-                   (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-                   (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+                   (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+                   (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * (1 - p_sfa) * p_lb,
                    (1 - p_vax) * (1 - p_imm)     * p_inf       * (1 - p_det_sq) * (1 - p_sfa) * (1 - p_lb),
                    (1 - p_vax) * (1 - p_imm)     * (1 - p_inf) * p_lb,
@@ -232,22 +234,22 @@ parvo_model <- function(l_params_all) {
         # TP PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * (1 - p_sfa)   * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * (1 - p_sfa)   * (1 - p_lb),
         # FN PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * (1 - p_sfa)   * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * (1 - p_sfa)   * (1 - p_lb),
         ## FN IgM
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * (1 - p_sfa) * (1 - p_lb),
         ### Susceptible, current or recent infection, FN IgG
@@ -255,22 +257,22 @@ parvo_model <- function(l_params_all) {
         # TP PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * (1 - p_sfa) * (1 - p_lb),
         # FN PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * p_und_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * p_und_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * (1 - p_sfa) * (1 - p_lb),
         ## FN IgM
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * (1 - p_sfa) * (1 - p_lb),
         ### Susceptible, no infection at first visit, FP IgG
@@ -278,14 +280,14 @@ parvo_model <- function(l_params_all) {
         # FP PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa)   * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa)   * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa)   * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa)   * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * (1 - p_inf_20) * p_lb,
@@ -293,14 +295,14 @@ parvo_model <- function(l_params_all) {
         # TN PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * (1 - p_sfa)   * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * (1 - p_sfa)   * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * (1 - p_sfa)   * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * (1 - p_sfa)   * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * (1 - p_inf_20) * p_lb,
@@ -308,14 +310,14 @@ parvo_model <- function(l_params_all) {
         ## TN IgM
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * (1 - p_sfa)    * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * (1 - p_sfa)    * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * (1 - p_sfa)    * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * (1 - p_sfa)    * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * (1 - p_inf_20)   * p_lb,
@@ -325,14 +327,14 @@ parvo_model <- function(l_params_all) {
         # FP PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa) * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa) * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * (1 - p_inf_20) * p_lb,
@@ -340,14 +342,14 @@ parvo_model <- function(l_params_all) {
         # TN PCR
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * (1 - p_sfa) * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * (1 - p_sfa) * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * (1 - p_sfa) * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * (1 - p_inf_20) * p_lb,
@@ -355,14 +357,14 @@ parvo_model <- function(l_params_all) {
         ## TN IgM
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * p_det_it       * p_det_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * p_det_it       * (1 - p_det_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * p_det_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * (1 - p_sfa)    * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * (1 - p_sfa)    * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * p_und_it       * p_und_sfa_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * p_und_it       * (1 - p_und_sfa_lb),
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * p_sfa_lb_nt,
-        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * p_und_sfa_lb_nt,
+        p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * (1 - p_sfa)    * p_lb,
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * (1 - p_sfa)    * (1 - p_lb),
         p_vax       * (1 - p_vax_eff) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * (1 - p_inf_20)   * p_lb,
@@ -417,22 +419,22 @@ parvo_model <- function(l_params_all) {
         # TP PCR
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * (1 - p_sfa)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * p_pcr_sens  * (1 - p_sfa)   * (1 - p_lb),
         # FN PCR
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * (1 - p_sfa)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * p_igm_sens_inf       * (1 - p_pcr_sens)  * (1 - p_sfa)   * (1 - p_lb),
         ## FN IgM
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * p_igg_sens_inf * (1 - p_igm_sens_inf) * (1 - p_sfa) * (1 - p_lb),
         ### Susceptible, current or recent infection, FN IgG
@@ -440,22 +442,22 @@ parvo_model <- function(l_params_all) {
         # TP PCR
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * p_pcr_sens       * (1 - p_sfa) * (1 - p_lb),
         # FN PCR
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * p_und_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * p_und_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * p_igm_sens_inf * (1 - p_pcr_sens) * (1 - p_sfa) * (1 - p_lb),
         ## FN IgM
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * p_inf_10 * (1 - p_igg_sens_inf) * (1 - p_igm_sens_inf) * (1 - p_sfa) * (1 - p_lb),
         ### Susceptible, no infection at first visit, FP IgG
@@ -463,14 +465,14 @@ parvo_model <- function(l_params_all) {
         # FP PCR
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * (1 - p_inf_20) * p_lb,
@@ -478,14 +480,14 @@ parvo_model <- function(l_params_all) {
         # TN PCR
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * p_sfa         * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * (1 - p_sfa)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_imm       * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * p_sfa         * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * (1 - p_sfa)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_imm) * (1 - p_sfa)   * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * (1 - p_igm_spec_inf) * p_pcr_spec       * (1 - p_inf_20) * p_lb,
@@ -493,14 +495,14 @@ parvo_model <- function(l_params_all) {
         ## TN IgM
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * p_sfa          * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * (1 - p_sfa)    * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * p_det_imm       * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * p_sfa          * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * (1 - p_sfa)    * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * p_inf_20         * (1 - p_det_imm) * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * (1 - p_igg_spec_immune) * p_igm_spec_inf       * (1 - p_inf_20)   * p_lb,
@@ -510,14 +512,14 @@ parvo_model <- function(l_params_all) {
         # FP PCR
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * p_det_inf       * (1 - p_sfa) * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * p_inf_20       * (1 - p_det_inf) * (1 - p_sfa) * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * (1 - p_pcr_spec) * (1 - p_inf_20) * p_lb,
@@ -525,14 +527,14 @@ parvo_model <- function(l_params_all) {
         # TN PCR
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * p_sfa       * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * p_det_sus       * (1 - p_sfa) * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * p_sfa       * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * (1 - p_sfa) * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * p_inf_20       * (1 - p_det_sus) * (1 - p_sfa) * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * (1 - p_igm_spec_inf) * p_pcr_spec       * (1 - p_inf_20) * p_lb,
@@ -540,19 +542,19 @@ parvo_model <- function(l_params_all) {
         ## TN IgM
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * p_det_it       * p_det_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * p_det_it       * (1 - p_det_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * p_det_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * p_sfa          * (1 - p_det_it) * (1 - p_det_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * (1 - p_sfa)    * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * p_det_sus       * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * p_und_it       * p_und_sfa_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * p_und_it       * (1 - p_und_sfa_lb),
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * p_sfa_lb_nt,
-        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * (1 - p_sfa_lb_nt),
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * p_und_sfa_lb_nt,
+        (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * p_sfa          * (1 - p_und_it) * (1 - p_und_sfa_lb_nt),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * (1 - p_sfa)    * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * p_inf_20         * (1 - p_det_sus) * (1 - p_sfa)    * (1 - p_lb),
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * (1 - p_inf_20)   * p_lb,
         (1 - p_vax) * (1 - p_imm) * (1 - p_inf_10) * p_igg_spec_immune * p_igm_spec_inf       * (1 - p_inf_20)   * (1 - p_lb),
-        ### Immune, TP IgG
+!!!        ### Immune, TP IgG
         ## FP IgM
         # FP PCR
         (1 - p_vax) * p_imm * p_igg_sens_immune * (1 - p_igm_spec_immune) * (1 - p_pcr_spec) * p_lb,
@@ -576,34 +578,52 @@ parvo_model <- function(l_params_all) {
         (1 - p_vax) * p_imm * (1 - p_igg_sens_immune) * p_igm_spec_immune * (1- p_lb)
       )
 
-      ## Reward vectors
-      # vector of deaths - status quo
+      ### Reward vectors
+      ## All Deaths
+      # status quo
       v_death_sq <- rep(c(d_lb, d_fd), 8)
+      # testing
+      v_death_test <- rep(c(d_lb, d_fd), 66)
+      # vaccination
+      v_death_vax <- rep(c(d_lb, d_fd), 17)
+      # vaccination + testing
+      v_death_vax_test <- rep(c(d_lb, d_fd), 138)
+      
+      ## Parvo B19 Deaths
+      # status quo
+      v_b19_death_sq <- c(d_p_lb, d_p_fd, d_p_lb, d_p_fd,
+                          d_p_lb, d_p_lb,
+                          d_p_lb, d_p_fd, d_p_lb, d_p_fd,
+                          d_p_lb, d_p_lb, d_p_lb, d_p_lb, d_p_lb, d_p_lb)
 
-      # vector of transfusions - status quo
+      # testing
+      v_b19_death_test <- c(rep(c(d_p_lb, d_p_fd), 24), d_p_lb, d_p_lb,
+                            rep(c(rep(c(d_p_lb, d_p_fd), 6), d_p_lb, d_p_lb), 5),
+                            rep(d_p_lb, 12))
+      # vaccination
+      v_b19_death_vax <- c(rep(c(d_p_lb, d_p_fd), 6), rep(d_p_lb, 6), 
+                           rep(c(d_p_lb, d_p_fd), 6), rep(d_p_lb, 4))
+      # vaccination + testing
+      v_b19_death_vax_test <- c(rep(c(d_p_lb, d_p_fd), 18),
+                                rep(c(rep(c(d_p_lb, d_p_fd), 6), d_p_lb, d_p_lb), 6),
+                                rep(d_p_lb, 24),
+                                rep(c(d_p_lb, d_p_fd), 18),
+                                rep(c(rep(c(d_p_lb, d_p_fd), 6), d_p_lb, d_p_lb), 6),
+                                rep(d_p_lb, 12))      
+      
+      ## Transfusions
+      # status quo
       v_transfusion_sq <- c(rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 2),
                             n_nt, n_nt, n_nt, n_nt)
-
-      # vector of deaths - testing
-      v_death_test <- rep(c(d_lb, d_fd), 66)
-
       # vector of transfusions - testing
       v_transfusion_test <- c(rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 6),
                               rep(c(rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 2), n_nt, n_nt), 6),
                               rep(n_nt, 12))
-
-      # vector of deaths - vaccination
-      v_death_vax <- rep(c(d_lb, d_fd), 17)
-
       # vector of transfusions - vaccination
       v_transfusion_vax <- c(rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 2),
                              rep(n_nt, 6),
                              rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 2),
                              rep(n_nt, 4))
-
-      # vector of deaths - vaccination + testing
-      v_death_vax_test <- rep(c(d_lb, d_fd), 138)
-
       # vector of transfusions - vaccination + testing
       v_transfusion_vax_test <- c(rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 6),
                                   rep(c(rep(c(n_it, n_it, n_nt, n_nt, n_nt, n_nt), 2), n_nt, n_nt), 6),
@@ -617,6 +637,12 @@ parvo_model <- function(l_params_all) {
       total_death_test     <- v_w_test %*% v_death_test %*% pop_size
       total_death_vax      <- v_w_vax %*% v_death_vax %*% pop_size
       total_death_vax_test <- v_w_vax_test %*% v_death_vax_test %*% pop_size
+      
+      # total parvo b19 deaths per policy
+      total_b19_death_sq       <- v_w_sq %*% v_b19_death_sq %*% pop_size
+      total_b19_death_test     <- v_w_test %*% v_b19_death_test %*% pop_size
+      total_b19_death_vax      <- v_w_vax %*% v_b19_death_vax %*% pop_size
+      total_b19_death_vax_test <- v_w_vax_test %*% v_b19_death_vax_test %*% pop_size
 
       # total transfusions per policy
       total_it_sq       <- v_w_sq %*% v_transfusion_sq %*% pop_size
@@ -633,12 +659,18 @@ parvo_model <- function(l_params_all) {
       # print(sum(v_w_vax))
       # print(sum(v_w_vax_test))
 
-      df_output <- data.frame(Strategy =  v_names_str,
-                              Deaths  =  c(total_death_sq, total_death_test,
-                                           total_death_vax,
-                                           total_death_vax_test),
-                              Transfusions = c(total_it_sq, total_it_test,
+      df_output <- data.frame(Strategy     = v_names_str,
+                              Deaths       = c(total_death_sq,
+                                               total_death_test,
+                                               total_death_vax,
+                                               total_death_vax_test),
+                              Transfusions = c(total_it_sq,
+                                               total_it_test,
                                                total_it_vax,
-                                               total_it_vax_test))
+                                               total_it_vax_test),
+                              B19_Deaths   = c(total_b19_death_sq,
+                                               total_b19_death_test,
+                                               total_b19_death_vax,
+                                               total_b19_death_vax_test))
       return(df_output)})
 }
