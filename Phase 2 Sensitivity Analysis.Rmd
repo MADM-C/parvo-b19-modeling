@@ -49,7 +49,7 @@ df_params_owsa <- data.frame(pars = c("p_imm", "p_inf",
                                       "p_det_surv", "p_sfa",
                                       "p_und_it"),
                              # min parameter values
-                             min  = c(0.25, 0, 0.05, 0, 0.6), 
+                             min  = c(0.25, 0, 0.05, 0, 0), 
                              # max parameter values
                              max  = c(0.75, 0.1, 0.5, 0.1, 1)
                              )
@@ -83,7 +83,7 @@ owsa_results$owsa_Deaths <- owsa_results$owsa_Deaths %>%
                                                         parameter))))))
 
 plot(owsa_results$owsa_Deaths) +
-  ylab("Expected Deaths")
+  ylab("Expected Fetal Deaths")
 
 # b19 deaths                                   
 owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
@@ -100,7 +100,7 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
                                                         parameter))))))
 
 plot(owsa_results$owsa_B19_Deaths) +
-  ylab("Expected B19 Deaths")
+  ylab("Expected B19 Fetal Deaths")
  
 # expected transfusions
 owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
@@ -147,9 +147,9 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
   mutate(parameter = ifelse(parameter == "p_imm", 
                             "Proportion Immune",
                             ifelse(parameter == "p_inf", 
-                                   "Infection Rate",
+                                   "Infection Prob.",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Rate in Surv",
+                                          "Detection Prob. in Surv",
                                                         parameter))))
 
 plot(owsa_results$owsa_B19_Deaths) +
@@ -194,7 +194,7 @@ heat_deaths_ii <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Proportion Immune') +
-  ylab(label = 'Infection Rate') +
+  ylab(label = 'Infection Probability') +
   ggtitle("Deaths Averted over Varying % Immune and Infection Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Deaths Averted")) +
@@ -216,7 +216,7 @@ heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Proportion Immune') +
-  ylab(label = 'Infection Rate') +
+  ylab(label = 'Infection Probability') +
   ggtitle("Transfusions Averted over Varying % Immune and Infection Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
@@ -329,8 +329,8 @@ heat_deaths_di <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
                                                   fill = incremental)) +
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
-  xlab(label = 'Detection Rate') +
-  ylab(label = 'Infection Rate') +
+  xlab(label = 'Detection Probability') +
+  ylab(label = 'Infection Probability') +
   ggtitle("Deaths Averted over Varying Detection Rate and Infection Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Deaths Averted")) +
@@ -351,8 +351,8 @@ heat_transfusions_di <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
                                                   fill = incremental)) +
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
-  xlab(label = 'Detection Rate') +
-  ylab(label = 'Infection Rate') +
+  xlab(label = 'Detection Probability') +
+  ylab(label = 'Infection Probability') +
   ggtitle("Transfusions Averted over Varying Detection Rate and Infection Rate") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +

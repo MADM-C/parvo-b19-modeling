@@ -16,9 +16,12 @@ load_params <- function() {
     p_det_imm  = 0.05, # probability of detection if assumed immune at first visit
     # probability of fetus developing severe fetal anemia
     p_sfa      = 0.075,
-    # probability of transfusion given
-    p_det_it    = 0.95,  # maternal infection detected
-    p_und_it    = 0.80,  # maternal infection undetected
+    # probability of transfusion given, alongside probability of fetus being at gestational age for transfusion (20%)
+    p_det_it    = (0.95)*(0.2),  # maternal infection detected
+    p_und_it    = (0.80)*(0.2),  # maternal infection undetected
+    
+    # probability of b19 fetal death being stillbirth
+    p_sb = 0.13, 
     
     # probability of live birth
     p_lb        = 0.9,
@@ -92,7 +95,7 @@ load_params <- function() {
     n_nt = 0,
     
     # population parameters
-    pop_size = 3600000
+    pop_size = 65000
   )
   
   return(l_params)
