@@ -7,9 +7,6 @@ load_params <- function() {
     p_imm     = 0.5,
     # infection rate (0.5-2% during nonepidemic years, 5-10% during epidemic years)
     p_inf    = 0.01,
-    #  early infection rate calculation
-    p_einf = ((1/6)*(13-sqrt(169-120*(0.01)))),
-    # p_einf = .00770601, 14-20 weeks inf = .0023118
     ## Clinical parameters
     # proportion of maternal infections detected
     p_det_sq   = 0.05,
@@ -35,8 +32,6 @@ load_params <- function() {
     # probability of live birth if severe fetal anemia is untreated in detected/undetected
     p_det_sfa_lb_nt  = (0.01)*(0.9),
     p_und_sfa_lb_nt = (0.01)*(0.9),
-    # probability of miscarriage (fetal death when maternal infection occurs pre 14 weeks)
-    p_mc = 0.99,
     
     ## test characteristics
     # IgG - Past Immunity
