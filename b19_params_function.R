@@ -8,7 +8,7 @@ load_params <- function() {
     # infection rate (0.5-2% during nonepidemic years, 5-10% during epidemic years)
     p_inf    = 0.01,
     #  early infection rate calculation
-    p_einf = ((1/6)*(13-sqrt(169-120*(0.01)))),
+    p_einf = ((1/14)*(27-sqrt(729-560*(0.01)))),
     # p_einf = .00770601, 14-20 weeks inf = .0023118
     ## Clinical parameters
     # proportion of maternal infections detected
