@@ -186,9 +186,6 @@ plot(owsa_results$owsa_B19_Deaths) +
 
 ggsave(path = "Phase 2 Plots", filename = "one-wayplot.png")
 
-
-
-
 ```
 ***
 ```{r, warning = FALSE}
