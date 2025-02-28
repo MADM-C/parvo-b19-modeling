@@ -25,7 +25,6 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Surveillance")
 n_str <- length(v_names_str)
-p_earlyinf = (0.3)*((1/6)*(13-sqrt(169-120*(0.01))))
 
 ```
 ***
@@ -49,13 +48,13 @@ base_case_final
 options(scipen = 999) 
 
 # varying infection rate, and detection rate
-df_params_owsa <- data.frame(pars = c("p_imm", "p_einf", 
+df_params_owsa <- data.frame(pars = c("p_imm", "p_inf", 
                                       "p_det_surv", "p_sfa",
                                       "p_und_it"),
                              # min parameter values
                              min  = c(0.25, 0, 0.05, 0, 0), 
                              # max parameter values
-                             max  = c(0.75, 0.02, 0.5, 0.1, 1)
+                             max  = c(0.75, 0.1, 0.5, 0.1, 1)
                              )
 # OWSA
 owsa_results <- run_owsa_det(params_range = df_params_owsa,  
@@ -76,14 +75,14 @@ owsa_results <- run_owsa_det(params_range = df_params_owsa,
 owsa_results$owsa_Deaths <- owsa_results$owsa_Deaths %>%
   mutate(parameter = ifelse(parameter == "p_imm", 
                             "Proportion Immune",
-                            ifelse(parameter == "p_einf", 
-                                   "14-20 WG Infection Rate",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Rate in Surveillance",
+                                          "Detection Probability in Surveillance",
                                           ifelse(parameter == "p_sfa", 
-                                                 "Severe Fetal Anemia Rate",
+                                                 "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
-                                                        "Transfusion Rate in Undetected",
+                                                        "Transfusion Probability in Undetected",
                                                         parameter))))))
 
 plot(owsa_results$owsa_Deaths) +
@@ -93,14 +92,14 @@ plot(owsa_results$owsa_Deaths) +
 owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
   mutate(parameter = ifelse(parameter == "p_imm", 
                             "Proportion Immune",
-                            ifelse(parameter == "p_einf", 
-                                   "14-20 WG Infection Prob.",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Rate in Surveillance",
+                                          "Detection Probability in Surveillance",
                                           ifelse(parameter == "p_sfa", 
-                                                 "Severe Fetal Anemia Rate",
+                                                 "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
-                                                        "Transfusion Rate in Undetected",
+                                                        "Transfusion Probability in Undetected",
                                                         parameter))))))
 
 plot(owsa_results$owsa_B19_Deaths) +
@@ -110,14 +109,14 @@ plot(owsa_results$owsa_B19_Deaths) +
 owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
   mutate(parameter = ifelse(parameter == "p_imm", 
                             "Proportion Immune",
-                            ifelse(parameter == "p_einf", 
-                                   "14-20 WG Infection Prob.",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Rate in Surv",
+                                          "Detection Probability in Surveillance",
                                           ifelse(parameter == "p_sfa", 
-                                                 "Severe Fetal Anemia Rate",
+                                                 "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
-                                                        "Transfusion Rate in Undet.",
+                                                        "Transfusion Probability in Undetected",
                                                         parameter))))))
 
 plot(owsa_results$owsa_Transfusions) +
@@ -126,12 +125,12 @@ plot(owsa_results$owsa_Transfusions) +
 
 ## One-way plot for manuscript
 # varying infection rate, and detection rate
-df_params_owsa <- data.frame(pars = c("p_imm", "p_einf", 
+df_params_owsa <- data.frame(pars = c("p_imm", "p_inf", 
                                       "p_det_surv"),
                              # min parameter values
                              min  = c(0.25, 0, 0.05), 
                              # max parameter values
-                             max  = c(0.75, 0.02, 0.5)
+                             max  = c(0.75, 0.1, 0.5)
                              )
 # OWSA
 owsa_results <- run_owsa_det(params_range = df_params_owsa,  
@@ -146,20 +145,27 @@ owsa_results <- run_owsa_det(params_range = df_params_owsa,
                              # names of the strategies
                              strategies = v_names_str,
                              progress = FALSE)
-# b19 deaths                                   
+# b19 stillbirths                                   
 owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
   mutate(parameter = ifelse(parameter == "p_imm", 
                             "Proportion Immune",
-                            ifelse(parameter == "p_einf", 
-                                   "14-20 WG Infection Prob.",
+                            ifelse(parameter == "p_inf", 
+                                   "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Prob. in Surv",
+                                          "Detection Probability in Surveillance",
                                                         parameter))))
 
-plot(owsa_results$owsa_B19_Deaths) +
-  ylab("Expected B19 Stillbirths")
- 
+# wrap_text <- function(x, chars = 21) {
+#   regex <- sprintf("(.{%s})", chars)
+#   gsub(regex, "\\1\n", x)
+# }
 
+plot(owsa_results$owsa_B19_Deaths) +
+  ylab("Expected B19 Stillbirths") + 
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labels = function(parameter) stringr::str_wrap(parameter, width = 7)
+  #facet_wrap(~parameter, strip.position = "top", labeller = as_labeller(wrap_text))
+ 
 
 ```
 ***
