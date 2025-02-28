@@ -185,15 +185,19 @@ plot(owsa_results$owsa_B19_Deaths) +
   #facet_wrap(~parameter, strip.position = "top", labeller = as_labeller(wrap_text))
 
 ggsave(path = "Phase 2 Plots", filename = "one-wayplot.png")
+
+
+
+
 ```
 ***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of probability of immunity and 14-20 WG infection
-df_params_twsa <- data.frame(pars = c("p_imm", "p_einf"),
+df_params_twsa <- data.frame(pars = c("p_imm", "p_inf"),
                               # min parameter values
                               min  = c(0.25, 0), 
                               # max parameter values
-                              max  = c(0.75, 0.02) 
+                              max  = c(0.75, 0.1) 
                               )
 # twsa dataframes for immunity and infection rate
 twsa_results <- run_twsa_det(params_range = df_params_twsa, 
@@ -217,19 +221,23 @@ twsa_deaths    <- twsa_results$twsa_Deaths %>%
   as.matrix()
 
 heat_deaths_ii <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
-                                                  y = p_einf,
+                                                  y = p_inf,
                                                   fill = incremental)) +
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Proportion Immune') +
-  ylab(label = '14-20 WG Infection Probability') +
-  ggtitle("Stillbirths Averted over Varying % Immune and 14-20 WG Infection Prob.") +
+  ylab(label = 'Infection Probability') +
+  ggtitle("Stillbirths Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Stillbirths Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_deaths_ii
+
+ggsave(path = "Phase 2 Plots", filename = "heat_deaths_ii.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -239,19 +247,23 @@ twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
   as.matrix()
 
 heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm,
-                                                  y = p_einf,
+                                                  y = p_inf,
                                                   fill = incremental)) +
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Proportion Immune') +
   ylab(label = 'Infection Probability') +
-  ggtitle("Transfusions Averted over Varying % Immune and 14-20 WG Infection Prob.") +
+  ggtitle("Transfusions Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_transfusions_ii
+
+ggsave(path = "Phase 2 Plots", filename = "heat_transfusions_ii.png")
 
 ```
 ***
@@ -291,13 +303,17 @@ heat_deaths_id <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Proportion Immune') +
   ylab(label = 'Detection Probability') +
-  ggtitle("Stillbirths Averted over Varying % Immune and Detection Prob.") +
+  ggtitle("Stillbirths Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Stillbirths Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_deaths_id
+
+ggsave(path = "Phase 2 Plots", filename = "heat_deaths_id.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -313,23 +329,27 @@ heat_transfusions_id <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Proportion Immune') +
   ylab(label = 'Detection Probability') +
-  ggtitle("Transfusions Averted over Varying % Immune and Detection Prob.") +
+  ggtitle("Transfusions Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_transfusions_id
+
+ggsave(path = "Phase 2 Plots", filename = "heat_transfusions_id.png")
 
 ```
 ***
 ```{r, warning = FALSE}
 # two way sensitivity analysis of probability of detection and 14-20 WG infection
-df_params_twsa <- data.frame(pars = c("p_det_surv", "p_einf"),
+df_params_twsa <- data.frame(pars = c("p_det_surv", "p_inf"),
                               # min parameter values
                               min  = c(0.05, 0), 
                               # max parameter values
-                              max  = c(0.5, 0.02) 
+                              max  = c(0.5, 0.1) 
                               )
 # twsa dataframes for immunity and infection rate
 twsa_results <- run_twsa_det(params_range = df_params_twsa, 
@@ -353,19 +373,23 @@ twsa_deaths    <- twsa_results$twsa_Deaths %>%
   as.matrix()
 
 heat_deaths_di <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
-                                                  y = p_einf,
+                                                  y = p_inf,
                                                   fill = incremental)) +
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Probability') +
   ylab(label = 'Infection Probability') +
-  ggtitle("Stillbirths Averted over Varying Detection Prob. and 14-20 WG Infection Prob.") +
+  ggtitle("Stillbirths Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Stillbirths Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_deaths_di
+
+ggsave(path = "Phase 2 Plots", filename = "heat_deaths_di.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -375,19 +399,23 @@ twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
   as.matrix()
 
 heat_transfusions_di <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det_surv,
-                                                  y = p_einf,
+                                                  y = p_inf,
                                                   fill = incremental)) +
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Probability') +
   ylab(label = 'Infection Probability') +
-  ggtitle("Transfusions Averted over Varying Detection Rate and 14-20 WG Infection Prob.") +
+  ggtitle("Transfusions Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_transfusions_di
+
+ggsave(path = "Phase 2 Plots", filename = "heat_transfusions_di.png")
 
 ```
 ***
@@ -426,14 +454,18 @@ heat_deaths_dt <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
   geom_tile() +
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Probability') +
-  ylab(label = 'Transfusion Prob. in Undetected') +
-  ggtitle("Stillbirths Averted over Varying Detection Prob. and Transfusion Prob. in Undetected") +
+  ylab(label = 'Transfusion Probability in Undetected') +
+  ggtitle("Stillbirths Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Stillbirths Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_deaths_dt
+
+ggsave(path = "Phase 2 Plots", filename = "heat_deaths_dt.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -449,13 +481,17 @@ heat_transfusions_dt <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Probability') +
   ylab(label = 'Transfusion Prob. in Undetected') +
-  ggtitle("Transfusions Averted over Varying Detection Prob. and Transfusion Prob. in Undetected") +
+  ggtitle("Transfusions Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_transfusions_dt
+
+ggsave(path = "Phase 2 Plots", filename = "heat_transfusions_dt.png")
 
 ```
 ***
@@ -495,13 +531,17 @@ heat_deaths_ds <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Probability') +
   ylab(label = 'Severe Fetal Anemia Probability') +
-  ggtitle("Stillbirths Averted over Varying Detection Prob. and SFA Prob.") +
+  ggtitle("Stillbirths Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Stillbirths Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_deaths_ds
+
+ggsave(path = "Phase 2 Plots", filename = "heat_deaths_ds.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -517,12 +557,17 @@ heat_transfusions_ds <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
   geom_text(aes(label = round(incremental, 0))) +
   xlab(label = 'Detection Probability') +
   ylab(label = 'Severe Fetal Anemia Probability') +
-  ggtitle("Transfusions Averted over Varying Detection Prob. and SFA Prob.") +
+  ggtitle("Transfusions Averted") +
   scale_fill_viridis(option = "turbo", alpha = 0.8) +
   guides(fill=guide_legend(title="Transfusions Averted")) +
   theme_bw() +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(legend.position = "none")
 
 heat_transfusions_ds
+
+ggsave(path = "Phase 2 Plots", filename = "heat_transfusions_ds.png")
+
 ```
 ***
