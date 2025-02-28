@@ -86,7 +86,12 @@ owsa_results$owsa_Deaths <- owsa_results$owsa_Deaths %>%
                                                         parameter))))))
 
 plot(owsa_results$owsa_Deaths) +
-  ylab("Expected Fetal Deaths")
+  ylab("Expected Fetal Deaths") + 
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
+  scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
+  labs(colour = "Strategy") +
+  theme_grey(base_size = 10)
 
 # b19 deaths                                   
 owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
@@ -103,7 +108,12 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
                                                         parameter))))))
 
 plot(owsa_results$owsa_B19_Deaths) +
-  ylab("Expected B19 Fetal Deaths")
+  ylab("Expected B19 Fetal Deaths") + 
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
+  scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
+  labs(colour = "Strategy") +
+  theme_grey(base_size = 10)
  
 # expected transfusions
 owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
@@ -120,7 +130,12 @@ owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
                                                         parameter))))))
 
 plot(owsa_results$owsa_Transfusions) +
-  ylab("Expected Transfusions")
+  ylab("Expected Transfusions") + 
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
+  scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
+  labs(colour = "Strategy") +
+  theme_grey(base_size = 10)
 
 
 ## One-way plot for manuscript
@@ -163,10 +178,13 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
 plot(owsa_results$owsa_B19_Deaths) +
   ylab("Expected B19 Stillbirths") + 
   scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
-  labels = function(parameter) stringr::str_wrap(parameter, width = 7)
+  facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
+  scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
+  labs(colour = "Strategy") +
+  theme_grey(base_size = 10)
   #facet_wrap(~parameter, strip.position = "top", labeller = as_labeller(wrap_text))
- 
 
+ggsave(path = "Phase 2 Plots", filename = "one-wayplot.png")
 ```
 ***
 ```{r, warning = FALSE}
