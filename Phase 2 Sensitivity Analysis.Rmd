@@ -78,7 +78,7 @@ owsa_results$owsa_Deaths <- owsa_results$owsa_Deaths %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability in Surveillance",
+                                          "Detection Probability with Increased Surveillance",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
@@ -100,7 +100,7 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability in Surveillance",
+                                          "Detection Probability with Increased Surveillance",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
@@ -122,7 +122,7 @@ owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability in Surveillance",
+                                          "Detection Probability with Increased Surveillance",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
@@ -167,7 +167,7 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability in Surveillance",
+                                          "Detection Probability with Increased Surveillance",
                                                         parameter))))
 
 # wrap_text <- function(x, chars = 21) {
