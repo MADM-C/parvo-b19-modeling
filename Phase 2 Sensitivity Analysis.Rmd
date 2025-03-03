@@ -199,9 +199,9 @@ plot(owsa_results$owsa_B19_Deaths) +
   scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
   labs(colour = "Strategy") +
   theme_grey(base_size = 10) +
-  geom_vline (data = filter(owsa_test, parameter == "Proportion Immune"), aes(xintercept = v_det)) +
-  geom_vline (data = filter(owsa_test, parameter == "Infection Probability"), aes(xintercept = v_inf)) +
-  geom_vline (data = filter(owsa_test, parameter == "Detection Probability with Increased Surveillance"), aes(xintercept = v_det))
+  geom_vline (data = filter(owsa_test, parameter == "Proportion Immune"), aes(xintercept = v_det), linetype = "dotted") +
+  geom_vline (data = filter(owsa_test, parameter == "Infection Probability"), aes(xintercept = v_inf), linetype = "dotted") +
+  geom_vline (data = filter(owsa_test, parameter == "Detection Probability with Increased Surveillance"), aes(xintercept = v_det), linetype = "dotted")
 
 ggsave(path = "Phase 2 Plots", filename = "one-wayplot.png")
 
