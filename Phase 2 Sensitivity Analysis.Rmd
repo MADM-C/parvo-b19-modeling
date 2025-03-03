@@ -26,6 +26,20 @@ l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Surveillance")
 n_str <- length(v_names_str)
 
+v_params <- load_params()
+v_params <- do.call(rbind.data.frame, v_params)
+v_params <- head(v_params, 3)
+colnames(v_params)
+v_params <- v_params %>% 
+  rename(Varied = c.0.5..0.075..0.5..0.05..0.5..0.5..0.05..0.075..0.95..0.8..0.13..)
+rownames <- rownames(v_params)
+rownames(v_params) <- c("v_imm", "v_inf", "v_det")
+
+v_imm <- v_params[1,1]
+v_inf <- v_params[2,1]
+v_det <- v_params[3,1]
+
+
 ```
 ***
 ```{r}
@@ -175,14 +189,19 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
 #   gsub(regex, "\\1\n", x)
 # }
 
+# create data frame to filter out variables for v_lines
+owsa_test <- as.data.frame(owsa_results$owsa_B19_Deaths)
+
 plot(owsa_results$owsa_B19_Deaths) +
   ylab("Expected B19 Stillbirths") + 
   scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
   facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
   scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
   labs(colour = "Strategy") +
-  theme_grey(base_size = 10)
-  #facet_wrap(~parameter, strip.position = "top", labeller = as_labeller(wrap_text))
+  theme_grey(base_size = 10) +
+  geom_vline (data = filter(owsa_test, parameter == "Proportion Immune"), aes(xintercept = v_det)) +
+  geom_vline (data = filter(owsa_test, parameter == "Infection Probability"), aes(xintercept = v_inf)) +
+  geom_vline (data = filter(owsa_test, parameter == "Detection Probability with Increased Surveillance"), aes(xintercept = v_det))
 
 ggsave(path = "Phase 2 Plots", filename = "one-wayplot.png")
 

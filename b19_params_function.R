@@ -6,14 +6,14 @@ load_params <- function() {
     # proportion of population immune
     p_imm     = 0.5,
     # infection rate (0.5-2% during nonepidemic years, 5-10% during epidemic years)
-    p_inf    = 0.01,
+    p_inf    = 0.075,
     #  early infection rate calculation
     #p_einf = ((1/14)*(27-sqrt(729-560*(0.07)))),
     # p_einf = .00770601, 14-20 weeks inf = .0023118
     ## Clinical parameters
     # proportion of maternal infections detected
-    p_det_sq   = 0.05,
     p_det_surv = 0.5,
+    p_det_sq   = 0.05,
     p_det_inf  = 0.5,  # probability of detection if assumed infected at first visit
     p_det_sus  = 0.5,  # probability of detection if assumed susceptible at first visit
     p_det_imm  = 0.05, # probability of detection if assumed immune at first visit

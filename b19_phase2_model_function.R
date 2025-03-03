@@ -8,6 +8,7 @@ phase2_model <- function(l_params_all) {
       p_einf = ((1/14)*(27-sqrt(729-560*(p_inf))))
       # probability of infection within 14-20
       p_linf = (7/20)*((1/14)*(27-sqrt(729-560*(p_inf))))
+      
       # vector of weights for each policy
       # status quo vector
       v_w_sq <- c((1-p_imm)*(p_einf)*p_det_sq*p_sfa*p_det_it*p_det_sfa_lb,
