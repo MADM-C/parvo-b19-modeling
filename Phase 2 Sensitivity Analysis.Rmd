@@ -198,7 +198,7 @@ plot(owsa_results$owsa_B19_Deaths) +
   facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
   scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
   labs(colour = "Strategy") +
-  theme_grey(base_size = 10) +
+  theme_bw() +
   geom_vline (data = filter(owsa_test, parameter == "Proportion Immune"), aes(xintercept = v_det), linetype = "dotted") +
   geom_vline (data = filter(owsa_test, parameter == "Infection Probability"), aes(xintercept = v_inf), linetype = "dotted") +
   geom_vline (data = filter(owsa_test, parameter == "Detection Probability with Increased Surveillance"), aes(xintercept = v_det), linetype = "dotted")
