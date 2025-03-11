@@ -3,48 +3,48 @@ phase2_model <- function(l_params_all) {
   with(
     as.list(l_params_all),
     {
-      # probabilities of infection 
-      # probability of infection within 1-13 WG
-      p_einf = ((1/14)*(27-sqrt(729-560*(p_inf))))
-      # probability of infection within 14-20
-      p_linf = (7/20)*((1/14)*(27-sqrt(729-560*(p_inf))))
+      # # probabilities of infection 
+      # # probability of infection within 1-13 WG
+      # p_einf = ((1/14)*(27-sqrt(729-560*(p_inf))))
+      # # probability of infection within 14-20
+      # p_linf = (7/20)*((1/14)*(27-sqrt(729-560*(p_inf))))
       
       # vector of weights for each policy
       # status quo vector
-      v_w_sq <- c((1-p_imm)*(p_einf)*p_det_sq*p_sfa*p_det_it*p_det_sfa_lb,
-                  (1-p_imm)*(p_einf)*p_det_sq*p_sfa*p_det_it*(1-p_det_sfa_lb),
-                  (1-p_imm)*(p_einf)*p_det_sq*p_sfa*(1-p_det_it)*p_det_sfa_lb_nt,
-                  (1-p_imm)*(p_einf)*p_det_sq*p_sfa*(1-p_det_it)*(1-p_det_sfa_lb_nt),
-                  (1-p_imm)*(p_einf)*p_det_sq*(1-p_sfa)*p_lb,
-                  (1-p_imm)*(p_einf)*p_det_sq*(1-p_sfa)*(1-p_lb),
-                  (1-p_imm)*(p_einf)*(1-p_det_sq)*p_sfa*p_und_it*p_und_sfa_lb,
-                  (1-p_imm)*(p_einf)*(1-p_det_sq)*p_sfa*p_und_it*(1-p_und_sfa_lb),
-                  (1-p_imm)*(p_einf)*(1-p_det_sq)*p_sfa*(1-p_und_it)*p_und_sfa_lb_nt,
-                  (1-p_imm)*(p_einf)*(1-p_det_sq)*p_sfa*(1-p_und_it)*(1-p_und_sfa_lb_nt),
-                  (1-p_imm)*(p_einf)*(1-p_det_sq)*(1-p_sfa)*p_lb,
-                  (1-p_imm)*(p_einf)*(1-p_det_sq)*(1-p_sfa)*(1-p_lb),
-                  (1-p_imm)*(p_linf)*(1-p_mc),
-                  (1-p_imm)*(p_linf)*(p_mc),
+      v_w_sq <- c((1-p_imm)*(p_inf*0.35)*p_det_sq*p_sfa*p_det_it*p_det_sfa_lb,
+                  (1-p_imm)*(p_inf*0.35)*p_det_sq*p_sfa*p_det_it*(1-p_det_sfa_lb),
+                  (1-p_imm)*(p_inf*0.35)*p_det_sq*p_sfa*(1-p_det_it)*p_det_sfa_lb_nt,
+                  (1-p_imm)*(p_inf*0.35)*p_det_sq*p_sfa*(1-p_det_it)*(1-p_det_sfa_lb_nt),
+                  (1-p_imm)*(p_inf*0.35)*p_det_sq*(1-p_sfa)*p_lb,
+                  (1-p_imm)*(p_inf*0.35)*p_det_sq*(1-p_sfa)*(1-p_lb),
+                  (1-p_imm)*(p_inf*0.35)*(1-p_det_sq)*p_sfa*p_und_it*p_und_sfa_lb,
+                  (1-p_imm)*(p_inf*0.35)*(1-p_det_sq)*p_sfa*p_und_it*(1-p_und_sfa_lb),
+                  (1-p_imm)*(p_inf*0.35)*(1-p_det_sq)*p_sfa*(1-p_und_it)*p_und_sfa_lb_nt,
+                  (1-p_imm)*(p_inf*0.35)*(1-p_det_sq)*p_sfa*(1-p_und_it)*(1-p_und_sfa_lb_nt),
+                  (1-p_imm)*(p_inf*0.35)*(1-p_det_sq)*(1-p_sfa)*p_lb,
+                  (1-p_imm)*(p_inf*0.35)*(1-p_det_sq)*(1-p_sfa)*(1-p_lb),
+                  (1-p_imm)*(p_inf*0.65)*(1-p_lb_ei),
+                  (1-p_imm)*(p_inf*0.65)*(p_lb_ei),
                   (1-p_imm)*(1-p_inf)*p_lb,
                   (1-p_imm)*(1-p_inf)*(1-p_lb),
                   p_imm*p_lb,
                   p_imm*(1-p_lb))
       
       # surveillance vector
-      v_w_surv <- c((1-p_imm)*(p_einf)*p_det_surv*p_sfa*p_det_it*p_det_sfa_lb,
-                    (1-p_imm)*(p_einf)*p_det_surv*p_sfa*p_det_it*(1-p_det_sfa_lb),
-                    (1-p_imm)*(p_einf)*p_det_surv*p_sfa*(1-p_det_it)*p_det_sfa_lb_nt,
-                    (1-p_imm)*(p_einf)*p_det_surv*p_sfa*(1-p_det_it)*(1-p_det_sfa_lb_nt),
-                    (1-p_imm)*(p_einf)*p_det_surv*(1-p_sfa)*p_lb,
-                    (1-p_imm)*(p_einf)*p_det_surv*(1-p_sfa)*(1-p_lb),
-                    (1-p_imm)*(p_einf)*(1-p_det_surv)*p_sfa*p_und_it*p_und_sfa_lb,
-                    (1-p_imm)*(p_einf)*(1-p_det_surv)*p_sfa*p_und_it*(1-p_und_sfa_lb),
-                    (1-p_imm)*(p_einf)*(1-p_det_surv)*p_sfa*(1-p_und_it)*p_und_sfa_lb_nt,
-                    (1-p_imm)*(p_einf)*(1-p_det_surv)*p_sfa*(1-p_und_it)*(1-p_und_sfa_lb_nt),
-                    (1-p_imm)*(p_einf)*(1-p_det_surv)*(1-p_sfa)*p_lb,
-                    (1-p_imm)*(p_einf)*(1-p_det_surv)*(1-p_sfa)*(1-p_lb),
-                    (1-p_imm)*(p_linf)*(1-p_mc),
-                    (1-p_imm)*(p_linf)*(p_mc),
+      v_w_surv <- c((1-p_imm)*(p_inf*0.35)*p_det_surv*p_sfa*p_det_it*p_det_sfa_lb,
+                    (1-p_imm)*(p_inf*0.35)*p_det_surv*p_sfa*p_det_it*(1-p_det_sfa_lb),
+                    (1-p_imm)*(p_inf*0.35)*p_det_surv*p_sfa*(1-p_det_it)*p_det_sfa_lb_nt,
+                    (1-p_imm)*(p_inf*0.35)*p_det_surv*p_sfa*(1-p_det_it)*(1-p_det_sfa_lb_nt),
+                    (1-p_imm)*(p_inf*0.35)*p_det_surv*(1-p_sfa)*p_lb,
+                    (1-p_imm)*(p_inf*0.35)*p_det_surv*(1-p_sfa)*(1-p_lb),
+                    (1-p_imm)*(p_inf*0.35)*(1-p_det_surv)*p_sfa*p_und_it*p_und_sfa_lb,
+                    (1-p_imm)*(p_inf*0.35)*(1-p_det_surv)*p_sfa*p_und_it*(1-p_und_sfa_lb),
+                    (1-p_imm)*(p_inf*0.35)*(1-p_det_surv)*p_sfa*(1-p_und_it)*p_und_sfa_lb_nt,
+                    (1-p_imm)*(p_inf*0.35)*(1-p_det_surv)*p_sfa*(1-p_und_it)*(1-p_und_sfa_lb_nt),
+                    (1-p_imm)*(p_inf*0.35)*(1-p_det_surv)*(1-p_sfa)*p_lb,
+                    (1-p_imm)*(p_inf*0.35)*(1-p_det_surv)*(1-p_sfa)*(1-p_lb),
+                    (1-p_imm)*(p_inf*0.65)*(1-p_lb_ei),
+                    (1-p_imm)*(p_inf*0.65)*(p_lb_ei),
                     (1-p_imm)*(1-p_inf)*p_lb,
                     (1-p_imm)*(1-p_inf)*(1-p_lb),
                     p_imm*p_lb,

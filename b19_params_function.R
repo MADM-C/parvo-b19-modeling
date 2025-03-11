@@ -6,7 +6,7 @@ load_params <- function() {
     # proportion of population immune
     p_imm     = 0.5,
     # infection rate (0.5-2% during nonepidemic years, 5-10% during epidemic years)
-    p_inf    = 0.05,
+    p_inf    = 0.075,
     #  early infection rate calculation
     #p_einf = ((1/14)*(27-sqrt(729-560*(0.07)))),
     # p_einf = .00770601, 14-20 weeks inf = .0023118
@@ -36,7 +36,7 @@ load_params <- function() {
     p_det_sfa_lb_nt  = (0.01)*(0.9),
     p_und_sfa_lb_nt = (0.01)*(0.9),
     # probability of miscarriage (fetal death when maternal infection occurs pre 14 weeks)
-    p_mc = 0.99,
+    p_lb_ei = (1-0.1323),
     
     ## test characteristics
     # IgG - Past Immunity
@@ -100,7 +100,7 @@ load_params <- function() {
     n_nt = 0,
     
     # population parameters
-    pop_size = 60000
+    pop_size = 65000
   )
   
   return(l_params)
