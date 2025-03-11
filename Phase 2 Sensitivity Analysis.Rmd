@@ -9,7 +9,7 @@ output:
 
 ```{r, echo = FALSE, include = FALSE}
 # Clear environment
-#rm(list=ls())
+rm(list=ls())
 
 # R Packages
 if (!require('pacman')) install.packages('pacman'); library(pacman) 
@@ -22,18 +22,22 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",
 ***
 ```{r}
 # load params
+source("b19_params_function.R")
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Surveillance")
 n_str <- length(v_names_str)
+
+## Load model
+source("b19_phase2_model_function.R")
 
 v_params <- load_params()
 v_params <- do.call(rbind.data.frame, v_params)
 v_params <- head(v_params, 3)
 colnames(v_params)
-v_params <- v_params %>% 
-  rename(Varied = c.0.5..0.075..0.5..0.05..0.5..0.5..0.05..0.075..0.95..0.8..0.13..)
-rownames <- rownames(v_params)
-rownames(v_params) <- c("v_imm", "v_inf", "v_det")
+# #v_params <- v_params %>%
+# #  rename(Varied = c.0.5..0.075..0.5..0.05..0.5..0.5..0.05..0.075..0.95..0.8..0.13..)
+# rownames <- rownames(v_params)
+# rownames(v_params) <- c("v_imm", "v_inf", "v_det")
 
 v_imm <- v_params[1,1]
 v_inf <- v_params[2,1]
