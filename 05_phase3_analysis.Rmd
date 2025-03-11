@@ -27,7 +27,7 @@ n_str <- length(v_names_str)
 
 ## Load model
 source("02_phase3_functions.R")
-
+ 
 ```
 ***
 

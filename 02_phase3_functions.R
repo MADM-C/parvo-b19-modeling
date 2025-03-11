@@ -25,7 +25,7 @@ parvo_model <- function(l_params_all) {
                   (1 - p_imm) * (1 - p_inf) * (1 - p_lb),
                   p_imm       * p_lb,
                   p_imm       * (1 - p_lb))
-
+ 
       # testing at first prenatal visit vector
       v_w_test <- c(
         ### Susceptible, current or recent infection, TP IgG
