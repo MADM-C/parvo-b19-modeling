@@ -1,0 +1,196 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1969" dy="-102" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-120" value="" style="group" vertex="1" connectable="0" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="4" y="1172" width="822" height="1164" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-62" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-43" target="_61ONZ_OSSigcRS0Ky06-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-63" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-43" target="_61ONZ_OSSigcRS0Ky06-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-43" value="Susceptible Pregnant Individuals" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry y="707.5294117647059" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-45" target="_61ONZ_OSSigcRS0Ky06-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-45" target="_61ONZ_OSSigcRS0Ky06-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-45" value="Maternal Infection to B19 within 14-20 WG" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="144.06185567010309" y="410.82352941176475" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-50" target="_61ONZ_OSSigcRS0Ky06-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-50" target="_61ONZ_OSSigcRS0Ky06-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-50" value="Maternal Infection to B19 not within 14-20 WG" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="144.06185567010309" y="1004.2352941176472" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-53" target="_61ONZ_OSSigcRS0Ky06-78">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-53" target="_61ONZ_OSSigcRS0Ky06-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-53" value="Detected Maternal Infection to B19" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="288.12371134020617" y="148.3529411764706" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-54" target="_61ONZ_OSSigcRS0Ky06-77">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-54" target="_61ONZ_OSSigcRS0Ky06-80">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-54" value="Undetected Maternal Infection to B19" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="288.12371134020617" y="673.294117647059" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-55" target="_61ONZ_OSSigcRS0Ky06-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-55" target="_61ONZ_OSSigcRS0Ky06-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-55" value="No Maternal Infection/Post 20 WG Infection" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="288.12371134020617" y="928.156862745098" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-56" target="_61ONZ_OSSigcRS0Ky06-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-56" target="_61ONZ_OSSigcRS0Ky06-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-56" value="Maternal Infection within 1-3 WG" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="288.12371134020617" y="1080.3137254901965" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-58" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="1042.2745098039218" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-59" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="1118.352941176471" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-71" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="890.1176470588238" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-72" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="966.1960784313728" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-75" target="_61ONZ_OSSigcRS0Ky06-94">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-75" target="_61ONZ_OSSigcRS0Ky06-95">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-75" value="Severe Fetal Anemia doesn&#39;t develop" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="38.039215686274524" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-77" target="_61ONZ_OSSigcRS0Ky06-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-77" target="_61ONZ_OSSigcRS0Ky06-88">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-77" value="Severe Fetal Anemia develops" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="562.9803921568629" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-92" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-78" target="_61ONZ_OSSigcRS0Ky06-86">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-78" target="_61ONZ_OSSigcRS0Ky06-87">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-78" value="Severe Fetal Anemia develops" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="258.66666666666674" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-100" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-80" target="_61ONZ_OSSigcRS0Ky06-99">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-80" target="_61ONZ_OSSigcRS0Ky06-98">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-80" value="Severe Fetal Anemia doesn&#39;t develop" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="432.1855670103093" y="783.6078431372553" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-86" target="_61ONZ_OSSigcRS0Ky06-103">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-86" target="_61ONZ_OSSigcRS0Ky06-109">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-86" value="Intrauterine Transfusion performed" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="182.5882352941177" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-112" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-87" target="_61ONZ_OSSigcRS0Ky06-104">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-87" target="_61ONZ_OSSigcRS0Ky06-108">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-87" value="No Intrauterine Transfusion performed" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="334.74509803921575" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-114" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-88" target="_61ONZ_OSSigcRS0Ky06-102">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-115" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-88" target="_61ONZ_OSSigcRS0Ky06-107">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-88" value="Intrauterine Transfusion performed" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="486.90196078431387" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-89" target="_61ONZ_OSSigcRS0Ky06-105">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-117" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;fontColor=default;strokeColor=#788AA3;" edge="1" parent="_61ONZ_OSSigcRS0Ky06-120" source="_61ONZ_OSSigcRS0Ky06-89" target="_61ONZ_OSSigcRS0Ky06-106">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-89" value="No Intrauterine Transfusion performed" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="639.058823529412" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-94" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-95" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="76.07843137254905" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-98" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="745.5686274509807" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-99" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="576.2474226804123" y="821.6470588235295" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-102" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="448.8627450980392" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-103" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="144.54901960784315" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-104" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="296.7058823529412" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-105" value="Live Birth" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="601.0196078431374" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-106" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="677.0980392156863" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-107" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="524.9411764705883" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-108" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="372.78431372549034" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+        <mxCell id="_61ONZ_OSSigcRS0Ky06-109" value="Fetal Death" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;" vertex="1" parent="_61ONZ_OSSigcRS0Ky06-120">
+          <mxGeometry x="720.3092783505155" y="220.62745098039218" width="101.69072164948454" height="45.64705882352943" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
