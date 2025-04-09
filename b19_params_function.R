@@ -275,63 +275,16 @@ my_parameterization_types <- c(
   "a, b",
   "a, b"
 )
-
-my_dists_params <- list(
-  ### Transition probabilities
-  ## Natural history parameters
-  # proportion of population immune
-  optim_beta_params(0.25, 0.75),
-  # infection rate (1-4% during nonepidemic years, 10-15% during epidemic years)
-  optim_beta_params(0.01, 0.2),
-  ## Clinical parameters
-  # proportion of maternal infections detected
-  optim_beta_params(0.01, 0.2),
-  optim_beta_params(0.05, 0.7),
-  optim_beta_params(0.05, 0.7),  # probability of detection if assumed infected at first visit
-  optim_beta_params(0.05, 0.7),  # probability of detection if assumed susceptible at first visit
-  optim_beta_params(0.01, 0.2),  # probability of detection if assumed immune at first visit
-  # probability of fetus developing severe fetal anemia
-  optim_beta_params(0.02, 0.15),
-  # probability of transfusion given
-  optim_beta_params(0.9, 1),  # maternal infection detected
-  optim_beta_params(0.6, 1),  # maternal infection undetected
+optim_beta_params <- function(ll, ul) {
+  optim_result <- optim(par = c(1000, 10), fn = gen_sse_beta,
+                        ll_target = ll,
+                        ul_target = ul,
+                        method = "Nelder-Mead")
+  alpha  <- optim_result$par[1]
+  beta   <- optim_result$par[2]
   
-  # probability of live birth
-  optim_beta_params(0.85, 0.95),
-  # probability of live birth if mother detected and severe fetal anemia
-  optim_beta_params((0.9)*(0.79), (0.9)*(0.99)),
-  # probability of live birth if mother undetected and severe fetal anemia
-  optim_beta_params((0.9)*(0.7), (0.9)*(0.9)),
-  # probability of live birth if severe fetal anemia is untreated in detected/undetected
-  optim_beta_params(0, (0.05)*(0.9)),
-  optim_beta_params(0, (0.05)*(0.9)),
-  
-  ## test characteristics
-  # IgG - Past Immunity
-  c(1016, 45),
-  c(727, 16),
-  
-  # IgG - Acute Infection
-  c(251, 18),
-  c(727, 16),
-  
-  # IgM - Past Immunity
-  c(464, 25),
-  c(199, 17),
-  
-  # IgM - Acute Infection
-  c(123, 18),
-  c(199, 17),
-  
-  # PCR
-  c(38, 3),
-  c(63, 0),
-  
-  # Vaccination
-  optim_beta_params(0.2, 0.8),
-  optim_beta_params(0.5, 1)
-)
-
+  return(c(alpha = alpha, beta = beta))
+}
 gen_sse_beta <- function(params, ll_target, ul_target) {
   alpha <- max(0, params[1])
   beta  <- max(0, params[2])
@@ -345,16 +298,7 @@ gen_sse_beta <- function(params, ll_target, ul_target) {
   return(out)
 }
 
-optim_beta_params <- function(ll, ul) {
-  optim_result <- optim(par = c(1000, 10), fn = gen_sse_beta,
-                        ll_target = ll,
-                        ul_target = ul,
-                        method = "Nelder-Mead")
-  alpha  <- optim_result$par[1]
-  beta   <- optim_result$par[2]
-  
-  return(c(alpha = alpha, beta = beta))
-}
+
 
 CorrelateUtils <- function(U, Q, epsilon, delta, tol){
   n <- nrow(U) #number of PSA samples
@@ -438,4 +382,61 @@ ordered_params <- function(n.runs, alphas, betas, tol) {
   
   return(m_Ustar)
 }
+my_dists_params <- list(
+  ### Transition probabilities
+  ## Natural history parameters
+  # proportion of population immune
+  optim_beta_params(0.25, 0.75),
+  # infection rate (1-4% during nonepidemic years, 10-15% during epidemic years)
+  optim_beta_params(0.01, 0.2),
+  ## Clinical parameters
+  # proportion of maternal infections detected
+  optim_beta_params(0.01, 0.2),
+  optim_beta_params(0.05, 0.7),
+  optim_beta_params(0.05, 0.7),  # probability of detection if assumed infected at first visit
+  optim_beta_params(0.05, 0.7),  # probability of detection if assumed susceptible at first visit
+  optim_beta_params(0.01, 0.2),  # probability of detection if assumed immune at first visit
+  # probability of fetus developing severe fetal anemia
+  optim_beta_params(0.02, 0.15),
+  # probability of transfusion given
+  optim_beta_params(0.9, 1),  # maternal infection detected
+  optim_beta_params(0.6, 1),  # maternal infection undetected
+  
+  # probability of live birth
+  optim_beta_params(0.85, 0.95),
+  # probability of live birth if mother detected and severe fetal anemia
+  optim_beta_params((0.9)*(0.79), (0.9)*(0.99)),
+  # probability of live birth if mother undetected and severe fetal anemia
+  optim_beta_params((0.9)*(0.7), (0.9)*(0.9)),
+  # probability of live birth if severe fetal anemia is untreated in detected/undetected
+  optim_beta_params(0, (0.05)*(0.9)),
+  optim_beta_params(0, (0.05)*(0.9)),
+  
+  ## test characteristics
+  # IgG - Past Immunity
+  c(1016, 45),
+  c(727, 16),
+  
+  # IgG - Acute Infection
+  c(251, 18),
+  c(727, 16),
+  
+  # IgM - Past Immunity
+  c(464, 25),
+  c(199, 17),
+  
+  # IgM - Acute Infection
+  c(123, 18),
+  c(199, 17),
+  
+  # PCR
+  c(38, 3),
+  c(63, 0),
+  
+  # Vaccination
+  optim_beta_params(0.2, 0.8),
+  optim_beta_params(0.5, 1)
+)
+
+
 
