@@ -20,13 +20,14 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",  "ggraph",
 ***
 ```{r}
 ## Load model parameters
+## Load model
+source("02_phase3_functions.R")
 source("b19_params_function.R")
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Screening", "Vaccination", "Vaccination and Screening")
 n_str <- length(v_names_str)
 
-## Load model
-source("02_phase3_functions.R")
+
 
 ```
 ***
