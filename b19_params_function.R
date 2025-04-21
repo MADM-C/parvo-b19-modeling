@@ -100,7 +100,7 @@ load_params <- function() {
     n_nt = 0,
     
     # population parameters
-    pop_size = 3600000
+    pop_size = 60000
   )
   
   return(l_params)
