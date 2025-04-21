@@ -20,14 +20,13 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",  "ggraph",
 ***
 ```{r}
 ## Load model parameters
-## Load model
-source("02_phase3_functions.R")
 source("b19_params_function.R")
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Screening", "Vaccination", "Vaccination and Screening")
 n_str <- length(v_names_str)
 
-
+## Load model
+source("02_phase3_functions.R")
 
 ```
 ***
@@ -460,7 +459,7 @@ my_params_basecase <- l_params_all
 psa_output <- run_psa(psa_samp = my_psa_params,
                       params_basecase = my_params_basecase,
                       FUN = parvo_model,
-                      outcomes = c('B19_Stillbirths', 'Transfusions'),
+                      outcomes = c('B19_Stillbirths', 'B19_Deaths', 'Transfusions'),
                       strategies = c("Status Quo", "Screening", "Vaccination", "Vaccination and Screening"),
                       progress = TRUE)
 
@@ -470,9 +469,9 @@ df_psa_stillbirth <- psa_output[["B19_Stillbirths"]][["other_outcome"]] %>%
   mutate(min = ifelse(`Status Quo` == min_sb, "Status Quo",
                       ifelse(`Screening` == min_sb, "Screening",
                              ifelse(`Vaccination` == min_sb, "Vaccination", "Vaccination and Screening")))) %>%
-  mutate(Screening_inc = `Screening` - `Status Quo`) %>%
+  mutate(screening_inc = `Screening` - `Status Quo`) %>%
   mutate(vax_inc = `Vaccination` - `Status Quo`) %>%
-  mutate(vax_Screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
+  mutate(vax_screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
   mutate(my_ranks = pmap(select(., c(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)), ~ 
            as_tibble_row(rank(c(...)),
             .name_repair = ~ str_c('rank', seq_along(.))))) %>%
@@ -483,9 +482,44 @@ c(quantile(df_psa_stillbirth$vax_inc, 0.025), quantile(df_psa_stillbirth$vax_inc
 c(quantile(df_psa_stillbirth$vax_Screening_inc, 0.025), quantile(df_psa_stillbirth$vax_Screening_inc, 0.975))
 
 df_psa_trans <- psa_output[["Transfusions"]][["other_outcome"]] %>%
+  mutate(screening_inc = `Screening` - `Status Quo`) %>%
+  mutate(vax_inc = `Vaccination` - `Status Quo`) %>%
+  mutate(vax_screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
   mutate(my_ranks = pmap(select(., c(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)), ~ 
            as_tibble_row(rank(c(...)),
             .name_repair = ~ str_c('rank', seq_along(.))))) %>%
      unnest(c(my_ranks))
-```
 
+
+df_psa_fd <- psa_output[["B19_Deaths"]][["other_outcome"]] %>%
+  mutate(screening_inc = `Screening` - `Status Quo`) %>%
+  mutate(vax_inc = `Vaccination` - `Status Quo`) %>%
+  mutate(vax_screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
+  mutate(my_ranks = pmap(select(., c(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)), ~ 
+           as_tibble_row(rank(c(...)),
+            .name_repair = ~ str_c('rank', seq_along(.))))) %>%
+     unnest(c(my_ranks))
+
+df_long_sb <- df_psa_stillbirth %>%
+  dplyr::mutate(id = row_number()) %>%
+  dplyr::select(c(screening_inc, vax_inc, vax_screening_inc, id)) %>%
+  pivot_longer(cols = c(screening_inc, vax_inc, vax_screening_inc), names_to = "Strategy", values_to = "Incremental")  %>%
+  dplyr::mutate(Outcome = "B19 Stillbirth")
+df_long_fd <- df_psa_fd %>%
+  dplyr::mutate(id = row_number()) %>%
+  dplyr::select(c(screening_inc, vax_inc, vax_screening_inc, id)) %>%
+  pivot_longer(cols = c(screening_inc, vax_inc, vax_screening_inc), names_to = "Strategy", values_to = "Incremental") %>%
+  dplyr::mutate(Outcome = "B19 Fetal Deaths") 
+df_long_trans <- df_psa_trans %>%
+  dplyr::mutate(id = row_number()) %>%
+  dplyr::select(c(screening_inc, vax_inc, vax_screening_inc, id)) %>%
+  pivot_longer(cols = c(screening_inc, vax_inc, vax_screening_inc), names_to = "Strategy", values_to = "Incremental") %>%
+  dplyr::mutate(Outcome = "Transfusions")
+df_long_psa_all <- rbind(df_long_sb, df_long_fd, df_long_trans) %>%
+  mutate(Strategy = ifelse(Strategy == "vax_screening_inc", "Screening + Vaccination", 
+                           ifelse(Strategy == "screening_inc", "Screening",
+                                  ifelse(Strategy == "vax_inc", "Vaccination", Strategy))))
+ggplot(data = df_long_psa_all, aes(x = Incremental, fill = Strategy)) +
+  geom_density() +
+  facet_grid(Strategy~Outcome, labeller = label_wrap_gen(18))
+```
