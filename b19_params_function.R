@@ -136,6 +136,8 @@ get_params_sa <- function() {
     # probability of live birth if severe fetal anemia is untreated in detected/undetected
     p_det_sfa_lb_nt  = c(0, (0.05)*(0.9)),
     p_und_sfa_lb_nt = c(0, (0.05)*(0.9)),
+    # probability of miscarriage (fetal death when maternal infection occurs pre 14 weeks)
+    p_lb_ei = c(0.828, 0.919),
     
     ## test characteristics
     # IgG - Past Immunity
@@ -193,6 +195,8 @@ my_dists <- c(
   # probability of live birth if severe fetal anemia is untreated in detected/undetected
   "beta",
   "beta",
+  # probability of miscarriage (fetal death when maternal infection occurs pre 14 weeks)
+  "beta",
   
   ## test characteristics
   # IgG - Past Immunity
@@ -248,6 +252,8 @@ my_parameterization_types <- c(
   "a, b",
   # probability of live birth if severe fetal anemia is untreated in detected/undetected
   "a, b",
+  "a, b",
+  # probability of miscarriage (fetal death when maternal infection occurs pre 14 weeks)
   "a, b",
   
   ## test characteristics
@@ -411,6 +417,8 @@ my_dists_params <- list(
   # probability of live birth if severe fetal anemia is untreated in detected/undetected
   optim_beta_params(0, (0.05)*(0.9)),
   optim_beta_params(0, (0.05)*(0.9)),
+  # probability of miscarriage (fetal death when maternal infection occurs pre 14 weeks)
+  optim_beta_params(0.828, 0.919),
   
   ## test characteristics
   # IgG - Past Immunity
