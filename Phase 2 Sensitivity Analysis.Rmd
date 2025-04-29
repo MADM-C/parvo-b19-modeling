@@ -24,7 +24,7 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",
 # load params
 source("b19_params_function.R")
 l_params_all <- load_params()
-v_names_str <- c("Status Quo", "Surveillance")
+v_names_str <- c("Status Quo", "Increasing Detection")
 n_str <- length(v_names_str)
 
 ## Load model
