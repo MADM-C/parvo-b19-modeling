@@ -17,6 +17,7 @@ source("02_phase3_functions.R")
 # Non-peak year, 2.1% SFA
 l_params_all <- load_params()
 l_params_all$p_sfa <- 0.021
+l_params_all$pop_size <- 65000
 v_p_imm <- c(0.7, 0.6, 0.5, 0.4)
 v_p_inf <- c(0.005, 0.01, 0.015)
 
