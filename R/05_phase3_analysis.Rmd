@@ -14,19 +14,19 @@ if (!require('pacman')) install.packages('pacman'); library(pacman)
 p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",  "ggraph", 
        "reshape2", "knitr", "stringr", "jsonlite", "rstudioapi", "tidyverse",
        "dampack", "data.table", "tornado", "ggplot2", "viridis",
-       "kableExtra")                
+       "kableExtra", "mc2d")                
 
 ```
 ***
 ```{r}
 ## Load model parameters
-source("b19_params_function.R")
+source("R/01_params_functions.R")
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Screening", "Vaccination", "Vaccination and Screening")
 n_str <- length(v_names_str)
 
 ## Load model
-source("02_phase3_functions.R")
+source("R/02_phase3_functions.R")
 
 ```
 ***
@@ -115,7 +115,7 @@ plot(owsa_results$owsa_B19_Stillbirths) +
   geom_vline(data = intercepts, aes(xintercept = xint), linetype = "dashed") +
   theme(legend.position = "bottom") 
 
-ggsave(path = "Phase 3 Plots", filename = "owsa_stillbirths.png")
+ggsave(path = "results/Phase 3 Plots", filename = "owsa_stillbirths.png")
 
 # B19 fetal deaths
 owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
@@ -137,7 +137,7 @@ plot(owsa_results$owsa_B19_Deaths) +
   geom_vline(data = intercepts, aes(xintercept = xint), linetype = "dashed") +
   theme(legend.position = "bottom") 
 
-ggsave(path = "Phase 3 Plots", filename = "owsa_b19deaths.png")
+ggsave(path = "results/Phase 3 Plots", filename = "owsa_b19deaths.png")
 
 # Transfusions
 owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
@@ -158,7 +158,7 @@ plot(owsa_results$owsa_Transfusions) +
   theme_bw() +
   geom_vline(data = intercepts, aes(xintercept = xint), linetype = "dashed") +
   theme(legend.position = "bottom") 
-ggsave(path = "Phase 3 Plots", filename = "owsa_transfusion.png")
+ggsave(path = "results/Phase 3 Plots", filename = "owsa_transfusion.png")
 
 owsa_results$owsa_B19_Stillbirths$outcome <- "B19 Stillbirths"
 owsa_results$owsa_B19_Deaths$outcome      <- "B19 Fetal Deaths"
@@ -191,7 +191,7 @@ ggplot(data = df_owsa_all, aes(x = param_val, y = outcome_val, color = strategy)
   theme_bw() +
   geom_vline(data = intercepts, aes(xintercept = xint), linetype = "dashed") +
   theme(legend.position = "bottom") 
-ggsave(path = "Phase 3 Plots", filename = "owsa_all.png")
+ggsave(path = "results/Phase 3 Plots", filename = "owsa_all.png")
 ```
 
 
@@ -247,7 +247,7 @@ heat_deaths_ii <- ggplot(data = twsa_sb, mapping = aes(x = p_imm,
   theme(legend.position = "none")
 
 heat_deaths_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_deaths_sq_test.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_deaths_sq_test.png",
        height = 7, width = 7)
 
 twsa_fd    <- twsa_results$twsa_B19_Deaths %>%
@@ -272,7 +272,7 @@ heat_fd_ii <- ggplot(data = twsa_fd, mapping = aes(x = p_imm,
   theme(legend.position = "none")
 
 heat_fd_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_fd_sq_test.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_fd_sq_test.png",
        height = 7, width = 7)
 
 twsa_transfusions <- twsa_results$twsa_Transfusions %>%
@@ -297,7 +297,7 @@ heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
   theme(legend.position = "none")
 
 heat_transfusions_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_trans_sq_test.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_trans_sq_test.png",
        height = 7, width = 7)
 
 ## heat maps status quo vs vaccination
@@ -323,7 +323,7 @@ heat_deaths_ii <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
   theme(legend.position = "none")
 
 heat_deaths_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_deaths_sq_vax.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_deaths_sq_vax.png",
        height = 7, width = 7)
 
 twsa_fd    <- twsa_results$twsa_B19_Deaths %>%
@@ -348,7 +348,7 @@ heat_fd_ii <- ggplot(data = twsa_fd, mapping = aes(x = p_imm,
   theme(legend.position = "none")
 
 heat_fd_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_fd_sq_vax.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_fd_sq_vax.png",
        height = 7, width = 7)
 
 twsa_transfusions <- twsa_results$twsa_Transfusions %>%
@@ -373,7 +373,7 @@ heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
   theme(legend.position = "none")
 
 heat_transfusions_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_trans_sq_vax.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_trans_sq_vax.png",
        height = 7, width = 7)
 
 ## heat maps status quo vs vaccination + Screening
@@ -399,7 +399,7 @@ heat_deaths_ii <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
   theme(legend.position = "none")
 
 heat_deaths_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_deaths_sq_testvax.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_deaths_sq_testvax.png",
        height = 7, width = 7)
 
 twsa_fd    <- twsa_results$twsa_B19_Deaths %>%
@@ -424,7 +424,7 @@ heat_fd_ii <- ggplot(data = twsa_fd, mapping = aes(x = p_imm,
   theme(legend.position = "none")
 
 heat_fd_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_fd_sq_testvax.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_fd_sq_testvax.png",
        height = 7, width = 7)
 
 twsa_transfusions <- twsa_results$twsa_Transfusions %>%
@@ -449,7 +449,7 @@ heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
   theme(legend.position = "none")
 
 heat_transfusions_ii
-ggsave(path = "Phase 3 Plots", filename = "twsa_imm_inf_trans_sq_testvax.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_imm_inf_trans_sq_testvax.png",
        height = 7, width = 7)
 
 
@@ -490,7 +490,7 @@ plot(twsa_results_opt) +
   labs(fill = "Strategy") +
   geom_point(mapping = aes(x = 0.5, y = 0.9), shape = 8)
 
-ggsave(path = "Phase 3 Plots", filename = "twsa_optimal.png",
+ggsave(path = "results/Phase 3 Plots", filename = "twsa_optimal.png",
        height = 5, width = 9)
 ```
 
@@ -500,32 +500,37 @@ ggsave(path = "Phase 3 Plots", filename = "twsa_optimal.png",
 set.seed(11111)
 n_samp <- 10000
 my_params <- names(get_params_sa())
-my_psa_params <- gen_psa_samp(params = my_params,
-                              dists = my_dists,
-                              parameterization_types = my_parameterization_types,
-                              dists_params = my_dists_params,
-                              n = n_samp)
-
+# my_psa_params <- gen_psa_samp(params = my_params,
+#                               dists = my_dists,
+#                               parameterization_types = my_parameterization_types,
+#                               dists_params = my_dists_params,
+#                               n = n_samp)
+my_psa_params <- get_params_psa(n_samp)
+colnames(my_psa_params) <- c("nsamp", my_params)
 ## Make modifications to PSA parameter sets
 # Rank ordering
 # probability of detection
 m_p_det <- ordered_params(n_samp * 100,
-                         c(my_dists_params[[3]][1], my_dists_params[[4]][1]),
-                         c(my_dists_params[[3]][2], my_dists_params[[4]][2]),
+                         v_min = c(0.01, 0.05),
+                         v_mode = c(0.05, 0.5),
+                         v_max = c(0.2, 0.7),
                          tol = 0.0001)
 row_indices <- which(m_p_det[,1] < m_p_det[,2])
 my_psa_params[,4:5] <- m_p_det[row_indices[1:n_samp], ]
+    
 # probability of transfusion (detected vs. undetected)
 m_p_it <- ordered_params(n_samp * 100,
-                         c(my_dists_params[[9]][1], my_dists_params[[10]][1]),
-                         c(my_dists_params[[9]][2], my_dists_params[[10]][2]),
+                         v_min = c(0.9, 0.6),
+                         v_mode = c(0.95, 0.80),
+                         v_max = c(1, 1),
                          tol = 0.0001)
 row_indices <- which(m_p_it[,1] > m_p_it[,2])
 my_psa_params[,10:11] <- m_p_it[row_indices[1:n_samp], ]
 # probability of live birth after severe fetal anemia (detected vs. undetected)
 m_p_sfa_lb <- ordered_params(n_samp * 100,
-                         c(my_dists_params[[12]][1], my_dists_params[[13]][1]),
-                         c(my_dists_params[[12]][2], my_dists_params[[13]][2]),
+                         v_min = c(0.9*0.79, 0.9*0.7),
+                         v_mode = c(0.9*0.891, 0.9*0.807),
+                         v_max = c(0.9*0.99, 0.9*0.9),
                          tol = 0.0001)
 row_indices <- which(m_p_sfa_lb[,1] > m_p_sfa_lb[,2])
 my_psa_params[,13:14] <- m_p_sfa_lb[row_indices[1:n_samp], ]
@@ -605,4 +610,130 @@ ggplot(data = df_long_psa_all, aes(x = Incremental, fill = Strategy)) +
   geom_density() +
   facet_grid(Strategy~Outcome, labeller = label_wrap_gen(18),
              scales = "free_y")
+
+df_scatter_sb <- df_psa_stillbirth %>%
+  select(screening_inc, vax_inc) %>%
+  mutate(screening_inc = screening_inc * -1) %>%
+  mutate(vax_inc = vax_inc * -1) %>%
+  mutate(max_strat = ifelse(vax_inc > screening_inc, "Vaccination", "Screening"))
+
+ggplot(data = df_scatter_sb, aes(x = screening_inc, y = vax_inc)) + 
+  geom_point(aes(color = max_strat), size = 0.7) + 
+  geom_abline(intercept = 0, slope = 1, color = "red") +
+  ylab("B19 Stillbirths Averted - Vaccination") +
+  xlab("B19 Stillbirths Averted - Screening") +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = comma) +
+  theme_bw() +
+  # xlim(0, 2700) +
+  # ylim(0, 2700) +
+  scale_color_manual(values=c("#1AE4B6FF", "#FABA39FF")) +
+  guides(color=guide_legend(title="Optimal Strategy")) +
+  annotate("text", x = c(3, 30), y = c(60, 5), label = c("93.95%", "6.05%"))
+ggsave(path = "results/Phase 3 Plots", filename = "psa_optimal_sb.png",
+       height = 5, width = 7)
+v_opt_sb <- table(df_scatter_sb$max_strat)
+
+# df_scatter_fd <- df_psa_fd %>%
+#   select(screening_inc, vax_inc) %>%
+#   mutate(screening_inc = screening_inc * -1) %>%
+#   mutate(vax_inc = vax_inc * -1) %>%
+#   mutate(max_strat = ifelse(vax_inc > screening_inc, "Vaccination", "Screening"))
+# 
+# ggplot(data = df_scatter_fd, aes(x = screening_inc, y = vax_inc)) + 
+#   geom_point(aes(color = max_strat)) + 
+#   # geom_abline(intercept = 0, slope = 1, color = "red") +
+#   ylab("B19 Fetal Deaths Averted - Vaccination") +
+#   xlab("B19 Fetal Deaths Averted - Screening") +
+#   scale_x_continuous(labels = comma) +
+#   scale_y_continuous(labels = comma) +
+#   theme_bw() +
+#   scale_color_manual(values=c("#1AE4B6FF", "#FABA39FF")) +
+#   guides(color=guide_legend(title="Optimal Strategy"))
+# table(df_scatter_fd$max_strat)
+# 
+# df_scatter_tr <- df_psa_trans %>%
+#   select(screening_inc, vax_inc) %>%
+#   mutate(screening_inc = screening_inc * -1) %>%
+#   mutate(vax_inc = vax_inc * -1) %>%
+#   mutate(max_strat = ifelse(vax_inc > screening_inc, "Vaccination", "Screening"))
+# 
+# ggplot(data = df_scatter_tr, aes(x = screening_inc, y = vax_inc)) + 
+#   geom_point(aes(color = max_strat)) + 
+#   # geom_abline(intercept = 0, slope = 1, color = "red") +
+#   ylab("Transfusions Averted - Vaccination") +
+#   xlab("Transfusions Averted - Screening") +
+#   scale_x_continuous(labels = comma) +
+#   scale_y_continuous(labels = comma) +
+#   theme_bw() +
+#   scale_color_manual(values=c("#1AE4B6FF", "#FABA39FF")) +
+#   guides(color=guide_legend(title="Optimal Strategy"))
+# table(df_scatter_tr$max_strat)
+
+### Ranges for table
+t(sapply(df_psa_trans[,1:4], range))
+t(sapply(df_psa_fd[,1:4], range))
+t(sapply(df_psa_stillbirth[,1:4], range))
+
+t(sapply(df_psa_trans[,5:7], range))
+t(sapply(df_psa_fd[,5:7], range))
+t(sapply(df_psa_stillbirth[,8:10], range))
+
 ```
+
+```{r}
+### Run PSA for 1% infection probability
+# Fix probability of infection
+my_psa_params$p_inf <- 0.01
+
+my_params_basecase <- l_params_all
+psa_output <- run_psa(psa_samp = my_psa_params,
+                      params_basecase = my_params_basecase,
+                      FUN = parvo_model,
+                      outcomes = c('B19_Stillbirths', 'B19_Deaths', 'Transfusions'),
+                      strategies = c("Status Quo", "Screening", "Vaccination", "Vaccination and Screening"),
+                      progress = TRUE)
+
+df_psa_stillbirth <- psa_output[["B19_Stillbirths"]][["other_outcome"]] %>%
+  mutate(max = names(.)[max.col(.)]) %>%
+  mutate(min_sb = pmin(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)) %>%
+  mutate(min = ifelse(`Status Quo` == min_sb, "Status Quo",
+                      ifelse(`Screening` == min_sb, "Screening",
+                             ifelse(`Vaccination` == min_sb, "Vaccination", "Vaccination and Screening")))) %>%
+  mutate(screening_inc = `Screening` - `Status Quo`) %>%
+  mutate(vax_inc = `Vaccination` - `Status Quo`) %>%
+  mutate(vax_screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
+  mutate(my_ranks = pmap(select(., c(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)), ~ 
+           as_tibble_row(rank(c(...)),
+            .name_repair = ~ str_c('rank', seq_along(.))))) %>%
+     unnest(c(my_ranks))
+
+df_psa_trans <- psa_output[["Transfusions"]][["other_outcome"]] %>%
+  mutate(screening_inc = `Screening` - `Status Quo`) %>%
+  mutate(vax_inc = `Vaccination` - `Status Quo`) %>%
+  mutate(vax_screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
+  mutate(my_ranks = pmap(select(., c(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)), ~ 
+           as_tibble_row(rank(c(...)),
+            .name_repair = ~ str_c('rank', seq_along(.))))) %>%
+     unnest(c(my_ranks))
+
+
+df_psa_fd <- psa_output[["B19_Deaths"]][["other_outcome"]] %>%
+  mutate(screening_inc = `Screening` - `Status Quo`) %>%
+  mutate(vax_inc = `Vaccination` - `Status Quo`) %>%
+  mutate(vax_screening_inc = `Vaccination and Screening` - `Status Quo`) %>%
+  mutate(my_ranks = pmap(select(., c(`Status Quo`, `Screening`, `Vaccination`, `Vaccination and Screening`)), ~ 
+           as_tibble_row(rank(c(...)),
+            .name_repair = ~ str_c('rank', seq_along(.))))) %>%
+     unnest(c(my_ranks))
+
+### Ranges for table
+t(sapply(df_psa_trans[,1:4], range))
+t(sapply(df_psa_fd[,1:4], range))
+t(sapply(df_psa_stillbirth[,1:4], range))
+
+t(sapply(df_psa_trans[,5:7], range))
+t(sapply(df_psa_fd[,5:7], range))
+t(sapply(df_psa_stillbirth[,8:10], range))
+```
+
