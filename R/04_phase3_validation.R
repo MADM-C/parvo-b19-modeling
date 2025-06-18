@@ -6,14 +6,15 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",  "ggraph",
 
 
 ## Load model parameters
-source("b19_params_function.R")
-v_names_str <- c("Status Quo", "Testing", "Vaccination", "Vaccination and Testing")
+source("R/01_params_functions.R")
+v_names_str <- c("Status Quo", "Testing", "Vaccination",
+                 "Vaccination and Testing")
 n_str <- length(v_names_str)
 
 ## Load model
-source("02_phase3_functions.R")
+source("R/02_phase3_functions.R")
 
-### Validation Tables 
+### Validation Tables
 # Non-peak year, 2.1% SFA
 l_params_all <- load_params()
 l_params_all$p_sfa <- 0.021
@@ -25,8 +26,8 @@ m_b19_deaths_np_2_1 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                               dimnames = list(v_p_imm, v_p_inf))
 m_trans_np_2_1 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                          dimnames = list(v_p_imm, v_p_inf))
-for (i in 1:length(v_p_imm)) {
-  for (j in 1:length(v_p_inf)) {
+for (i in seq_along(v_p_imm)) {
+  for (j in seq_along(v_p_inf)) {
     l_params_all$p_imm <- v_p_imm[i]
     l_params_all$p_inf <- v_p_inf[j]
     results <- parvo_model(l_params_all)
@@ -45,8 +46,8 @@ m_b19_deaths_py_2_1 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                               dimnames = list(v_p_imm, v_p_inf))
 m_trans_py_2_1 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                          dimnames = list(v_p_imm, v_p_inf))
-for (i in 1:length(v_p_imm)) {
-  for (j in 1:length(v_p_inf)) {
+for (i in seq_along(v_p_imm)) {
+  for (j in seq_along(v_p_inf)) {
     l_params_all$p_imm <- v_p_imm[i]
     l_params_all$p_inf <- v_p_inf[j]
     results <- parvo_model(l_params_all)
@@ -65,8 +66,8 @@ m_b19_deaths_np_7_5 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                               dimnames = list(v_p_imm, v_p_inf))
 m_trans_np_7_5 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                          dimnames = list(v_p_imm, v_p_inf))
-for (i in 1:length(v_p_imm)) {
-  for (j in 1:length(v_p_inf)) {
+for (i in seq_along(v_p_imm)) {
+  for (j in seq_along(v_p_inf)) {
     l_params_all$p_imm <- v_p_imm[i]
     l_params_all$p_inf <- v_p_inf[j]
     results <- parvo_model(l_params_all)
@@ -85,8 +86,8 @@ m_b19_deaths_py_7_5 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                               dimnames = list(v_p_imm, v_p_inf))
 m_trans_py_7_5 <- matrix(nrow = length(v_p_imm), ncol = length(v_p_inf),
                          dimnames = list(v_p_imm, v_p_inf))
-for (i in 1:length(v_p_imm)) {
-  for (j in 1:length(v_p_inf)) {
+for (i in seq_along(v_p_imm)) {
+  for (j in seq_along(v_p_inf)) {
     l_params_all$p_imm <- v_p_imm[i]
     l_params_all$p_inf <- v_p_inf[j]
     results <- parvo_model(l_params_all)
