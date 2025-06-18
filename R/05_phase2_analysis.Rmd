@@ -96,7 +96,7 @@ owsa_results$owsa_Deaths <- owsa_results$owsa_Deaths %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability with Increased Surveillance",
+                                          "Detection Probability",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
@@ -118,7 +118,7 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability with Increased Surveillance",
+                                          "Detection Probability",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
@@ -140,7 +140,7 @@ owsa_results$owsa_Transfusions <- owsa_results$owsa_Transfusions %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability with Increased Surveillance",
+                                          "Detection Probability",
                                           ifelse(parameter == "p_sfa", 
                                                  "Severe Fetal Anemia Probability",
                                                  ifelse(parameter == "p_und_it", 
@@ -185,7 +185,7 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
                             ifelse(parameter == "p_inf", 
                                    "Infection Probability",
                                    ifelse(parameter == "p_det_surv", 
-                                          "Detection Probability with Increased Surveillance",
+                                          "Detection Probability",
                                                         parameter))))
 
 # wrap_text <- function(x, chars = 21) {
@@ -196,16 +196,17 @@ owsa_results$owsa_B19_Deaths <- owsa_results$owsa_B19_Deaths %>%
 # create data frame to filter out variables for v_lines
 owsa_test <- as.data.frame(owsa_results$owsa_B19_Deaths)
 
-plot(owsa_results$owsa_B19_Deaths) +
+plot(owsa_results$owsa_B19_Deaths,) +
   ylab("Expected B19 Stillbirths") + 
   scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
   facet_wrap(~parameter, labeller = label_wrap_gen(30), scales = "free_x") +
-  scale_color_discrete(labels = c("Status Quo", "Surveillance")) +
+  #scale_color_manual(values = c("darkcyan","navyblue")) +
+  scale_color_discrete(labels = c("Status Quo", "Increased Detection")) +
   labs(colour = "Strategy") +
   theme_bw() +
   geom_vline (data = filter(owsa_test, parameter == "Proportion Immune"), aes(xintercept = v_det), linetype = "dotted") +
   geom_vline (data = filter(owsa_test, parameter == "Infection Probability"), aes(xintercept = v_inf), linetype = "dotted") +
-  geom_vline (data = filter(owsa_test, parameter == "Detection Probability with Increased Surveillance"), aes(xintercept = v_det), linetype = "dotted")
+  geom_vline (data = filter(owsa_test, parameter == "Detection Probability"), aes(xintercept = v_det), linetype = "dotted") 
 
 ggsave(path = "results/Phase 2 Plots", filename = "one-wayplot.png")
 
