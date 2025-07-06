@@ -20,13 +20,14 @@ p_load("devtools", "scales", "ellipse", "lazyeval", "igraph",  "ggraph",
 ***
 ```{r}
 ## Load model parameters
-source("R/01_params_functions.R")
+setwd("~/R/parvo-b19-modeling/R")
+source("01_params_functions.R")
 l_params_all <- load_params()
 v_names_str <- c("Status Quo", "Screening", "Vaccination", "Vaccination and Screening")
 n_str <- length(v_names_str)
 
 ## Load model
-source("R/02_phase3_functions.R")
+source("02_phase3_functions.R")
 
 ```
 ***
