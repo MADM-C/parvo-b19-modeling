@@ -1,5 +1,5 @@
 ---
-title: "Phase 2 Sensitivity Analysis"
+title: "IDS Sensitivity Analysis"
 author: "Ritesh Sivakumar"
 date: "`r Sys.Date()`"
 output:
@@ -208,7 +208,7 @@ plot(owsa_results$owsa_B19_Deaths,) +
   geom_vline (data = filter(owsa_test, parameter == "B. Infection Probability"), aes(xintercept = v_inf), linetype = "dotted") +
   geom_vline (data = filter(owsa_test, parameter == "C. Detection Probability"), aes(xintercept = v_det), linetype = "dotted") 
 
-ggsave(path = "results/Phase 2 Plots", filename = "one-wayplot.png")
+ggsave(path = "results/IDS Plots", filename = "one-wayplot.png")
 
 ```
 ***
@@ -258,7 +258,7 @@ heat_deaths_ii <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
 
 heat_deaths_ii
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_deaths_ii.png")
+ggsave(path = "results/IDS Plots", filename = "heat_deaths_ii.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -284,7 +284,7 @@ heat_transfusions_ii <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
 
 heat_transfusions_ii
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_transfusions_ii.png")
+ggsave(path = "results/IDS Plots", filename = "heat_transfusions_ii.png")
 
 ```
 ***
@@ -334,7 +334,7 @@ heat_deaths_id <- ggplot(data = twsa_deaths, mapping = aes(x = p_imm,
 
 heat_deaths_id
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_deaths_id.png")
+ggsave(path = "results/IDS Plots", filename = "heat_deaths_id.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -360,7 +360,7 @@ heat_transfusions_id <- ggplot(data = twsa_transfusions, mapping = aes(x = p_imm
 
 heat_transfusions_id
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_transfusions_id.png")
+ggsave(path = "results/IDS Plots", filename = "heat_transfusions_id.png")
 
 ```
 ***
@@ -410,7 +410,7 @@ heat_deaths_di <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
 
 heat_deaths_di
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_deaths_di.png")
+ggsave(path = "results/IDS Plots", filename = "heat_deaths_di.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -436,7 +436,7 @@ heat_transfusions_di <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
 
 heat_transfusions_di
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_transfusions_di.png")
+ggsave(path = "results/IDS Plots", filename = "heat_transfusions_di.png")
 
 ```
 ***
@@ -486,7 +486,7 @@ heat_deaths_dt <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
 
 heat_deaths_dt
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_deaths_dt.png")
+ggsave(path = "results/IDS Plots", filename = "heat_deaths_dt.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -512,7 +512,7 @@ heat_transfusions_dt <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
 
 heat_transfusions_dt
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_transfusions_dt.png")
+ggsave(path = "results/IDS Plots", filename = "heat_transfusions_dt.png")
 
 ```
 ***
@@ -562,7 +562,7 @@ heat_deaths_ds <- ggplot(data = twsa_deaths, mapping = aes(x = p_det_surv,
 
 heat_deaths_ds
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_deaths_ds.png")
+ggsave(path = "results/IDS Plots", filename = "heat_deaths_ds.png")
 
 # sensitivity analysis of transfusions averted and plot
 twsa_transfusions    <- twsa_results$twsa_Transfusions %>%
@@ -588,7 +588,7 @@ heat_transfusions_ds <- ggplot(data = twsa_transfusions, mapping = aes(x = p_det
 
 heat_transfusions_ds
 
-ggsave(path = "results/Phase 2 Plots", filename = "heat_transfusions_ds.png")
+ggsave(path = "results/IDS Plots", filename = "heat_transfusions_ds.png")
 
 ```
 ***
