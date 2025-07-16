@@ -4,16 +4,20 @@
 ## About
 
 - Welcome to the Midwest Analytics and Disease Modeling Center's ([MADMC](https://www.sph.umn.edu/research/centers/midwest-analytics-and-disease-modeling/)) Human Parvovirus B19 (B19) Toolset.
-
 - We have developed 3 tools in partnership with the Minnesota Department of Health (MDH) and the Minnesota Electronic Health Records Consortium (MNEHRC).
+- These tools are meant to help provide public health practitioners with estimates of burden of disease and the impact of varying public health interventions on fetal outcomes.
 
-- These tools are meant to help provide public health practioners with estimates of burden of disease and the impact of varying public health interventions on fetal outcomes.
+## Human Parvovirus B19 (B19)
+
+- B19 is respiratory illness that usually manifests as a mild disease.
+- However, in pregnant individuals development of B19 infection can spread to the fetus and cause severe fetal complications. 
+- There was a recent uptick in B19 cases noted by the [CDC](https://www.cdc.gov/han/2024/han00514.html) and [MDH](https://www.health.state.mn.us/communities/ep/han/2024/aug16parvo.pdf).
 
 
 ## Tool 1 - Burden of Disease Spreadsheet
 
 - This spreadsheet based tool can be found in the "Burden-of-Illness-Tool" folder.
-- Open the folder and select the "MADMC B19 Pregancy Outcome Estimate Tool.xlsx" and open in Microsoft Excel. 
+- Open the folder and select the "MADMC B19 Pregnancy Outcome Estimate Tool.xlsx" and open in Microsoft Excel. 
 - Detailed instructions and information about the tool and user options are included within the file itself within each sheet. 
 
 
