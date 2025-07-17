@@ -39,7 +39,6 @@
 ## Other Miscellaneous Filepaths
 
 - The "Archive" consists of older versions of code and functions.
-- The main project folder has the decision tree for the IDS model as "detection_model_decision_tree.drawio.png."
 - The "R" folder contains a "!boneyard" with older versions of code with previous nameing conventions.
 
 
